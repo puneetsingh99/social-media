@@ -1,0 +1,18 @@
+{
+  "name": "social-media",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "build-css": "npx tailwindcss -i ./src/tailwind.css -o ./src/index.css --minify --jit --purge='./src/**/*.jsx' -w"
+  },
+  "dependencies": {
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react-refresh": "^1.3.1",
+    "vite": "^2.4.4"
+  }
+}
