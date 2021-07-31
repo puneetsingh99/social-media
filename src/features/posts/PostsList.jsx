@@ -4,6 +4,7 @@ import { Error, Loader, NavDesktop, PageHeader } from "../../common/components";
 import { PostExcerpt } from "./PostExcerpt";
 import { fetchPosts, selectAllPosts } from "./postsSlice";
 import { SideBar } from "../side-bar/SideBar";
+import { AddPostForm } from "./AddPostForm";
 
 export const PostsList = () => {
   const { posts, status, error } = useSelector(selectAllPosts);
@@ -29,6 +30,7 @@ export const PostsList = () => {
       <NavDesktop />
       <section className="border border-outline border-t-0  border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
         <PageHeader heading={"Home"} />
+        <AddPostForm />
         {status === "loading" && <Loader />}
         {status === "succeeded" && renderPosts}
         {status === "failed" && <Error message={error} />}

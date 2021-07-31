@@ -28,7 +28,7 @@ export const Avatar = ({ img, size }) => {
     <img
       src={imgSrc}
       alt="profile pic of the user"
-      className={`${avatarDimensions} rounded-full`}
+      className={`${avatarDimensions} rounded-full object-fit`}
     />
   );
 };

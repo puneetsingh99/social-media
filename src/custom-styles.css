@@ -3,12 +3,30 @@
 }
 
 .transparent-blue {
-  background-color: rgba(59, 130, 246, 0.3);
+  background-color: inherit;
+}
+
+.transparent-blue:hover {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+.transparent-pink {
+  background-color: inherit;
+}
+
+.transparent-pink:hover {
+  background-color: rgb(236, 72, 153, 0.1);
 }
 
 .grid-cols-252 {
   display: grid;
   grid-template-columns: 2fr 6fr 2fr;
+}
+
+.flex-c {
+  display: flex;
+  justify-items: center;
+  align-items: center;
 }
 
 /**
@@ -43,3 +61,4 @@ thin scrollbar
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
