@@ -5,3 +5,41 @@
 .transparent-blue {
   background-color: rgba(59, 130, 246, 0.3);
 }
+
+.grid-cols-252 {
+  display: grid;
+  grid-template-columns: 2fr 6fr 2fr;
+}
+
+/**
+thin scrollbar
+*/
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: inherit;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #374151;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;

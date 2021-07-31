@@ -3,7 +3,7 @@ import axios from "axios";
 import { API_ALL_POSTS } from "../../api";
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
-  const response = await axios.get(API_ALL_POSTS / dfd);
+  const response = await axios.get(API_ALL_POSTS);
   return response.data.posts;
 });
 

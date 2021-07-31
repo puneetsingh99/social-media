@@ -1,12 +1,12 @@
 .basic:before {
   content: "";
   display: block;
-  height: 50px;
-  width: 50px;
+  height: 25px;
+  width: 25px;
   -webkit-animation: spin 0.5s infinite linear;
   animation: spin 0.5s infinite linear;
-  border: 6px green solid;
-  border-left-color: red;
+  border: 3px #173853 solid;
+  border-left-color: #1da1f2;
   border-radius: 100%;
 }
 
