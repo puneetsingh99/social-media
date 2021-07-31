@@ -2,23 +2,23 @@ import React from "react";
 import defaultPic from "../../assets/default_profile.png";
 
 export const Avatar = ({ img, size }) => {
-  let avatarSize;
+  let avatarDimensions;
 
   switch (size) {
     case "sm":
-      avatarSize = 8;
+      avatarDimensions = "w-8 h-8";
       break;
 
     case "lg":
-      avatarSize = 12;
+      avatarDimensions = "w-12 h-12";
       break;
 
     case "md":
-      avatarSize = 16;
+      avatarDimensions = "w-16 h-16";
       break;
 
     default:
-      avatarSize = 12;
+      avatarDimensions = "w-12 h-12";
       break;
   }
 
@@ -28,7 +28,7 @@ export const Avatar = ({ img, size }) => {
     <img
       src={imgSrc}
       alt="profile pic of the user"
-      className={`w-${avatarSize} h-${avatarSize} rounded-full`}
+      className={`${avatarDimensions} rounded-full`}
     />
   );
 };
