@@ -1,7 +1,7 @@
 import React from "react";
 import { GoComment } from "react-icons/go";
 import { AiOutlineHeart } from "react-icons/ai";
-import { RiShareForward2Line } from "react-icons/ri";
+import { FiShare } from "react-icons/fi";
 
 export const ReactionButtons = () => {
   const commonClasses = `flex-c cursor-pointer rounded-full p-2`;
@@ -21,10 +21,10 @@ export const ReactionButtons = () => {
         <GoComment size={20} />
       </div>
       <div
-        className={` ${commonClasses}hover:text-brand transparent-blue`}
+        className={` ${commonClasses} p-4 hover:text-brand transparent-blue`}
         title="Share"
       >
-        <RiShareForward2Line size={20} />
+        <FiShare size={20} />
       </div>
     </article>
   );

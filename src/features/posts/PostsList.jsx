@@ -7,20 +7,21 @@ import { SideBar } from "../side-bar/SideBar";
 import { AddPostForm } from "./AddPostForm";
 
 export const PostsList = () => {
-  const { posts, status, error } = useSelector(selectAllPosts);
-  console.log({ posts, status, error });
+  const posts = useSelector(selectAllPosts);
+  const auth = useSelector((state) => state.auth);
+  console.log(auth);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    if (status === "idle") {
+    if (posts.status === "idle") {
       dispatch(fetchPosts());
     }
-  }, [status, dispatch]);
+  }, [posts.status, dispatch]);
 
   let renderPosts;
 
-  if (status === "succeeded") {
-    renderPosts = posts.map((post) => {
+  if (posts.status === "succeeded") {
+    renderPosts = posts.posts.map((post) => {
       return <PostExcerpt key={post._id} post={post} />;
     });
   }
@@ -31,9 +32,10 @@ export const PostsList = () => {
       <section className="border border-outline border-t-0  border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
         <PageHeader heading={"Home"} />
         <AddPostForm />
-        {status === "loading" && <Loader />}
-        {status === "succeeded" && renderPosts}
-        {status === "failed" && <Error message={error} />}
+        <div className="h-3 bg-dark-3-hover border-b border-outline"></div>
+        {posts.status === "loading" && <Loader />}
+        {posts.status === "succeeded" && renderPosts}
+        {posts.status === "failed" && <Error message={error} />}
       </section>
       <SideBar />
     </main>

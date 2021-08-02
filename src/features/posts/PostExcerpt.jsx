@@ -10,7 +10,7 @@ export const PostExcerpt = ({ post }) => {
   return (
     <article
       key={post._id}
-      className="flex px-2 py-4 pb-1 border-b border-outline"
+      className="flex px-2 py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
     >
       <aside className="min-w-max px-3">
         <Avatar img={profilePic} />
