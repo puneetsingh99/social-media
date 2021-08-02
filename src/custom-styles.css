@@ -29,6 +29,11 @@
   align-items: center;
 }
 
+.text-link {
+  color: inherit;
+  text-decoration: none;
+}
+
 /**
 thin scrollbar
 */

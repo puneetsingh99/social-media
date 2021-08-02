@@ -1,8 +1,9 @@
 import React from "react";
 import { PostsList } from "./features/posts/PostsList";
 import { Routes, Route } from "react-router-dom";
-import { LoginForm } from "./features/auth/LoginForm";
+import { LoginForm } from "./features/auth/login/LoginForm";
 import { PrivateRoute } from "./common/components/PrivateRoute";
+import { SignupForm } from "./features/auth/signup/SignupForm";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <PrivateRoute path="/" element={<PostsList />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/signup" element={<SignupForm />} />
       </Routes>
     </main>
   );
