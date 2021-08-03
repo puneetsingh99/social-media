@@ -2,6 +2,7 @@ import React from "react";
 import ReactPlayer from "react-player";
 import { Avatar } from "../../common/components";
 import { ReactionButtons } from "./ReactionButtons";
+import { Link } from "react-router-dom";
 
 export const PostExcerpt = ({ post }) => {
   const { author, content, image, video } = post;
@@ -12,9 +13,12 @@ export const PostExcerpt = ({ post }) => {
       key={post._id}
       className="flex px-2 py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
     >
-      <aside className="min-w-max px-3">
-        <Avatar img={profilePic} />
-      </aside>
+      <Link to={`user/${_id}`}>
+        <aside className="min-w-max px-3">
+          <Avatar img={profilePic} />
+        </aside>
+      </Link>
+
       <div className="w-full">
         <div className="text-md flex items-center">
           <h2 className="font-bold mr-1">{`${firstname} ${lastname}`}</h2>

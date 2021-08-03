@@ -29,10 +29,10 @@ module.exports = {
         700: "700px",
       },
       maxWidth: {
-        1250: "1250px",
+        1250: "1220px",
       },
       gridTemplateColumns: {
-        252: "2fr 5fr 2.5fr",
+        252: "2fr 4.5fr 2.5fr",
       },
     },
   },

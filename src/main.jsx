@@ -6,7 +6,9 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./app/store";
 import { BrowserRouter as Router } from "react-router-dom";
+import { fetchAllUsers } from "./features/users/usersSlice";
 
+store.dispatch(fetchAllUsers());
 ReactDOM.render(
   <React.StrictMode>
     <Router>

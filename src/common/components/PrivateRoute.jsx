@@ -7,13 +7,7 @@ export const PrivateRoute = ({ path, element, ...props }) => {
   const location = useLocation();
   const auth = useSelector((state) => state.auth);
   const { isUserLoggedIn } = auth.auth;
-
-  console.log("COMING FROM PRIVATE ROUTE");
-  console.log({ isUserLoggedIn });
-
   let loginUser = !isUserLoggedIn;
-
-  console.log({ loginUser });
 
   if (isUserLoggedIn) {
     const loginObject = localStorage.getItem("socialMediaLogin");

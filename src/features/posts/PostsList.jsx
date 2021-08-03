@@ -8,10 +8,8 @@ import { AddPostForm } from "./AddPostForm";
 
 export const PostsList = () => {
   const posts = useSelector(selectAllPosts);
-  const auth = useSelector((state) => state.auth);
-  console.log(auth);
-
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (posts.status === "idle") {
       dispatch(fetchPosts());

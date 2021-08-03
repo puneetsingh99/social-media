@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { API_LOGIN, API_SIGNUP } from "../../api";
 import { persistAuthState, setupAuthHeaders } from "./utils";
+import { getUserAPI } from "../../api";
 
 const authReset = {
   isUserLoggedIn: false,
@@ -27,7 +28,21 @@ export const signupUser = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post(API_SIGNUP, credentials);
-      console.log(response);
+      return response.data.user;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchLoggedInUser = createAsyncThunk(
+  "auth/fetchUser",
+  async ({ userId, token }, thunkAPI) => {
+    axios.defaults.headers.common["Authorization"] = token;
+
+    try {
+      const response = await axios.get(getUserAPI(userId));
       return response.data.user;
     } catch (error) {
       console.log(error);
@@ -39,6 +54,7 @@ export const signupUser = createAsyncThunk(
 const initialState = {
   status: "idle",
   auth: persistAuthState(),
+  loggedInUser: null,
   error: null,
 };
 
@@ -51,7 +67,8 @@ export const authSlice = createSlice({
       state.status = "idle";
       state.auth = authReset;
       state.error = null;
-      setupAuthHeaders();
+      state.loggedInUser = null;
+      delete axios.defaults.headers.common["Authorization"];
     },
   },
   extraReducers: {
@@ -69,10 +86,9 @@ export const authSlice = createSlice({
         JSON.stringify(updatedLoginStatus)
       );
 
-      setupAuthHeaders(token);
+      axios.defaults.headers.common["Authorization"] = token;
     },
     [loginWithCredentials.rejected]: (state, action) => {
-      console.log(action.payload);
       state.status = "failed";
       state.auth = authReset;
       state.error = action.payload.message;
@@ -96,16 +112,18 @@ export const authSlice = createSlice({
     },
 
     [signupUser.rejected]: (state, action) => {
-      console.log("SIGNUP REQUEST REJECTED");
-      console.log(action.payload.message);
       state.status = "failed";
       state.auth = authReset;
       state.error = action.payload.message;
+    },
+    [fetchLoggedInUser.fulfilled]: (state, action) => {
+      state.loggedInUser = action.payload;
     },
   },
 });
 
 export const selectAuth = (state) => state.auth;
+export const selectLoggedInUser = (state) => state.auth.loggedInUser;
 
 export const { logout, validateForm } = authSlice.actions;
 

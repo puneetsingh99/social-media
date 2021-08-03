@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Avatar } from "../../common/components";
 import { HiOutlinePhotograph } from "react-icons/hi";
-import defaultProfilePic from "../../assets/default_profile.png";
+import {
+  selectAuth,
+  selectLoggedInUser,
+  fetchLoggedInUser,
+} from "../auth/authSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 export const AddPostForm = () => {
-  let profilePic = defaultProfilePic;
+  const { auth } = useSelector(selectAuth);
+  const { isUserLoggedIn, userId, token } = auth;
+  const loggedInUser = useSelector(selectLoggedInUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isUserLoggedIn) {
+      dispatch(fetchLoggedInUser({ userId, token }));
+    }
+  }, [isUserLoggedIn, userId, dispatch]);
+
   return (
     <article className="flex px-2 py-3 pb-1 border-b border-outline">
       <aside className="min-w-max px-3">
-        <Avatar img={profilePic} />
+        <Avatar img={loggedInUser ? loggedInUser.profilePic : ""} />
       </aside>
       <div className="w-full py-4">
         <textarea
