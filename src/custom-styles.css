@@ -10,6 +10,19 @@
   background-color: rgba(59, 130, 246, 0.2);
 }
 
+.transparent-brand {
+  background-color: inherit;
+  transition: 200ms ease-in-out;
+  -webkit-transition: 200ms ease-in-out;
+  -moz-transition: 200ms ease-in-out;
+  -ms-transition: 200ms ease-in-out;
+  -o-transition: 200ms ease-in-out;
+}
+
+.transparent-brand:hover {
+  background-color: rgba(29, 161, 242, 0.1);
+}
+
 .transparent-pink {
   background-color: inherit;
 }

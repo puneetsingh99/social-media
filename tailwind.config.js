@@ -15,6 +15,7 @@ module.exports = {
         "dark-1": "#243447",
         outline: "#38444D",
         brand: "#1DA1F2",
+        brandPink: "#E1245F",
         "text-light": "#FFFEFE",
         "text-gray": "#8898A7",
         "light-blue": "#173853",

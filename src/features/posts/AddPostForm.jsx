@@ -7,6 +7,7 @@ import {
   fetchLoggedInUser,
 } from "../auth/authSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 export const AddPostForm = () => {
   const { auth } = useSelector(selectAuth);
@@ -23,7 +24,9 @@ export const AddPostForm = () => {
   return (
     <article className="flex px-2 py-3 pb-1 border-b border-outline">
       <aside className="min-w-max px-3">
-        <Avatar img={loggedInUser ? loggedInUser.profilePic : ""} />
+        <Link to={`/user/${userId}`} className="text-link">
+          <Avatar img={loggedInUser ? loggedInUser.profilePic : ""} />
+        </Link>
       </aside>
       <div className="w-full py-4">
         <textarea

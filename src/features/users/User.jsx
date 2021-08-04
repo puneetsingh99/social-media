@@ -16,7 +16,8 @@ import { UserDetails } from "./UserDetails";
 
 export const User = () => {
   const { userId } = useParams();
-  const { auth } = useSelector((state) => state.auth);
+  const { auth, loggedInUser } = useSelector((state) => state.auth);
+  console.log(loggedInUser);
   const { token } = auth;
   const userState = useSelector((state) => state.users);
   const postState = useSelector((state) => state.posts);
@@ -43,7 +44,7 @@ export const User = () => {
       <section className="border border-outline border-t-0  border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
         {userState.user && (
           <div>
-            <div className="flex-c border-b border-outline px-3  sticky top-0 bg-dark-3">
+            <div className="flex-c border-b border-outline px-3  sticky z-30 top-0 bg-dark-3">
               <div
                 onClick={() => navigate(-1)}
                 className="p-1 rounded-full transparent-blue cursor-pointer text-brand mr-6"

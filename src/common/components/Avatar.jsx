@@ -22,7 +22,7 @@ export const Avatar = ({ img, size }) => {
       break;
 
     case "2xl":
-      avatarDimensions = "w-28 h-28";
+      avatarDimensions = "w-32 h-32";
       break;
 
     default:
