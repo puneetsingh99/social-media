@@ -5,3 +5,4 @@ export { Error } from "./Error";
 export { Avatar } from "./Avatar";
 export { NavDesktop } from "./nav/NavDesktop";
 export { PageHeader } from "./PageHeader";
+export { SideBar } from "./side-bar/SideBar";

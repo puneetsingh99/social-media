@@ -13,7 +13,7 @@ export const PostExcerpt = ({ post }) => {
       key={post._id}
       className="flex px-2 py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
     >
-      <Link to={`user/${_id}`}>
+      <Link to={`/user/${_id}`} className="text-link">
         <aside className="min-w-max px-3">
           <Avatar img={profilePic} />
         </aside>
@@ -21,7 +21,9 @@ export const PostExcerpt = ({ post }) => {
 
       <div className="w-full">
         <div className="text-md flex items-center">
-          <h2 className="font-bold mr-1">{`${firstname} ${lastname}`}</h2>
+          <Link to={`/user/${_id}`} className="text-link">
+            <h2 className="font-bold mr-1 hover:underline">{`${firstname} ${lastname}`}</h2>
+          </Link>
           <p className="text-text-gray mr-1">{`@${username}`}</p>
           <p className="text-text-gray ml-1">
             <span className="text-sm">•</span> {` 5 minutes ago`}

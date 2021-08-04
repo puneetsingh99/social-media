@@ -1,9 +1,10 @@
 import React from "react";
 
-export const PageHeader = ({ heading }) => {
+export const PageHeader = ({ heading, subHeading }) => {
   return (
-    <header className="bg-dark-3 sticky top-0 border-b border-outline p-4">
+    <header className={`${subHeading ? "p-1" : "p-4"}`}>
       <h1 className="text-xl font-extrabold">{heading}</h1>
+      {subHeading && <p className="text-text-gray text-sm">{subHeading}</p>}
     </header>
   );
 };

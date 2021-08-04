@@ -18,6 +18,10 @@
   background-color: rgb(236, 72, 153, 0.1);
 }
 
+.bg-semi-transparent {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .flex-c {
   display: flex;
   justify-items: center;
@@ -27,6 +31,10 @@
 .text-link {
   color: inherit;
   text-decoration: none;
+}
+
+.line-height {
+  line-height: 22px;
 }
 
 /**

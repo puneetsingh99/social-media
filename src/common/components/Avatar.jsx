@@ -9,12 +9,20 @@ export const Avatar = ({ img, size }) => {
       avatarDimensions = "w-8 h-8";
       break;
 
-    case "lg":
+    case "md":
       avatarDimensions = "w-12 h-12";
       break;
 
-    case "md":
+    case "lg":
       avatarDimensions = "w-16 h-16";
+      break;
+
+    case "xl":
+      avatarDimensions = "w-20 h-20";
+      break;
+
+    case "2xl":
+      avatarDimensions = "w-28 h-28";
       break;
 
     default:
@@ -28,7 +36,7 @@ export const Avatar = ({ img, size }) => {
     <img
       src={imgSrc}
       alt="profile pic of the user"
-      className={`${avatarDimensions} rounded-full object-fit`}
+      className={`${avatarDimensions} rounded-full object-fit hover:bg-semi-transparent`}
     />
   );
 };

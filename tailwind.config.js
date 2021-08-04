@@ -28,11 +28,17 @@ module.exports = {
         500: "500px",
         700: "700px",
       },
+      height: {
+        200: "200px",
+        250: "250px",
+        300: "300px",
+        350: "350px",
+      },
       maxWidth: {
         1250: "1220px",
       },
       gridTemplateColumns: {
-        252: "2fr 4.5fr 2.5fr",
+        252: "2fr 5fr 3fr",
       },
     },
   },

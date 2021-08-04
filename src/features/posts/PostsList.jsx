@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { Error, Loader, NavDesktop, PageHeader } from "../../common/components";
 import { PostExcerpt } from "./PostExcerpt";
 import { fetchPosts, selectAllPosts } from "./postsSlice";
-import { SideBar } from "../side-bar/SideBar";
+import { SideBar } from "../../common/components/side-bar/SideBar";
 import { AddPostForm } from "./AddPostForm";
 
 export const PostsList = () => {
-  const posts = useSelector(selectAllPosts);
+  const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,7 +28,9 @@ export const PostsList = () => {
     <main className="max-w-1250 m-auto grid grid-cols-252">
       <NavDesktop />
       <section className="border border-outline border-t-0  border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
-        <PageHeader heading={"Home"} />
+        <div className="bg-dark-3 border-b border-outline sticky top-0">
+          <PageHeader heading={"Home"} />
+        </div>
         <AddPostForm />
         <div className="h-3 bg-dark-3-hover border-b border-outline"></div>
         {posts.status === "loading" && <Loader />}

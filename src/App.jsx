@@ -11,7 +11,7 @@ function App() {
     <main className="min-h-screen font-inter bg-dark-3 text-text-light">
       <Routes>
         <PrivateRoute path="/" element={<PostsList />} />
-        <PrivateRoute path="user/:userId" element={<User />} />
+        <PrivateRoute path="/user/:userId" element={<User />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/signup" element={<SignupForm />} />
       </Routes>
