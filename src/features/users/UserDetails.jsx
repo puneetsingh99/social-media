@@ -7,10 +7,10 @@ import { getFollowButtonCSS } from "./utils/getFollowButtonCSS";
 import { updateFollowers, fetchUser } from "./usersSlice";
 import { useUserDetail } from "./hooks/useUserDetail";
 
-export const UserDetails = () => {
+export const UserDetails = ({ user }) => {
+  const { userId } = useParams();
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth.auth);
-  const { user } = useSelector((state) => state.users);
 
   const {
     _id,
@@ -35,13 +35,11 @@ export const UserDetails = () => {
     const isAFollower = followers.find(
       (user) => user.toString() === authState.userId.toString()
     );
-    console.log({ isAFollower });
     isAFollower !== undefined
       ? setInFollowersList(true)
       : setInFollowersList(false);
   }, [followers, setInFollowersList]);
 
-  console.log({ inFollowersList });
   const [hoverState, setHoverState] = useState(false);
 
   const followButtonParams = { isLoggedInUser, inFollowersList, hoverState };
@@ -76,7 +74,13 @@ export const UserDetails = () => {
             onMouseLeave={() => setHoverState(false)}
             className={followButtonCSS}
           >
-            {followers.find((user) => user === authState.userId)
+            {followers.find((user) => {
+              console.log({ user });
+              console.log({ loggedInUser: authState.userId });
+              const userMatched = user === authState.userId;
+              console.log({ userMatched });
+              return user._id === authState.userId;
+            })
               ? "Unfollow"
               : "Follow"}
           </button>

@@ -81,18 +81,18 @@ export const usersSlice = createSlice({
       state.error = action.payload.message;
     },
     [updateFollowers.fulfilled]: (state, action) => {
-      // const { updatedLoggedInUser, updatedUser } = action.payload;
+      const { updatedLoggedInUser, updatedUser } = action.payload;
 
-      // const loggedInUserIndex = state.allUsers.findIndex(
-      //   (user) => user._id === updatedLoggedInUser._id
-      // );
+      const loggedInUserIndex = state.allUsers.findIndex(
+        (user) => user._id === updatedLoggedInUser._id
+      );
 
-      // const updatedUserIndex = state.allUsers.findIndex(
-      //   (user) => user._id === updatedUser._id
-      // );
+      const updatedUserIndex = state.allUsers.findIndex(
+        (user) => user._id === updatedUser._id
+      );
 
-      // state.allUsers[loggedInUserIndex] = updatedLoggedInUser;
-      // state.allUsers[updatedUserIndex] = updatedUser;
+      state.allUsers[loggedInUserIndex] = updatedLoggedInUser;
+      state.allUsers[updatedUserIndex] = updatedUser;
       state.user = action.payload.updatedUser;
       console.log("followers updated");
     },
