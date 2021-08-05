@@ -5,3 +5,5 @@ export const API_LOGIN = `${API_ROOT}/login`;
 export const API_SIGNUP = `${API_ROOT}/user`;
 export const getUserAPI = (userId) => `${API_ROOT}/user/${userId}`;
 export const getPostsByUserAPI = (userId) => `${API_ROOT}/user/${userId}/posts`;
+export const updateFollowersAPI = (userId) =>
+  `${API_ROOT}/user/${userId}/follow`;

@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Avatar } from "../../common/components";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { getFollowButtonText } from "./utils/getFollowButtonText";
 import { getFollowButtonCSS } from "./utils/getFollowButtonCSS";
+import { updateFollowers } from "./usersSlice";
 
 export const UserDetails = ({ user }) => {
-  const { userId } = useSelector((state) => state.auth.auth);
+  const dispatch = useDispatch();
+  const { userId, token } = useSelector((state) => state.auth.auth);
+  const userState = useSelector((state) => state.users);
+  // console.log(userState.user, userState.allUsers);
   const {
     _id,
     coverPic,
@@ -20,10 +24,20 @@ export const UserDetails = ({ user }) => {
     following,
   } = user;
 
-  const isLoggedInUser = _id === userId;
-  const inFollowersList = followers.find((user) => user._id === userId);
+  console.log("user from user details");
+  console.log({ user });
 
+  const isLoggedInUser = _id === userId;
+
+  const [inFollowersList, setInFollowersList] = useState(false);
+  useEffect(() => {
+    const isAFollower = followers.find((user) => user._id === userId);
+    isAFollower ? setInFollowersList(true) : setInFollowersList(false);
+  }, [user, setInFollowersList]);
+
+  console.log({ inFollowersList });
   const [hoverState, setHoverState] = useState(false);
+
   const followButtonParams = { isLoggedInUser, inFollowersList, hoverState };
   const followButtonText = getFollowButtonText(followButtonParams);
   const followButtonCSS = getFollowButtonCSS(followButtonParams);
@@ -41,11 +55,22 @@ export const UserDetails = ({ user }) => {
         </div>
         <div className="flex justify-end items-center h-full pr-6 py-3">
           <button
+            onClick={() => {
+              followButtonText === "Edit profile"
+                ? console.log("Edit profile text")
+                : dispatch(
+                    updateFollowers({
+                      loggedInUserId: userId,
+                      userId: _id,
+                      token,
+                    })
+                  );
+            }}
             onMouseEnter={() => setHoverState(true)}
             onMouseLeave={() => setHoverState(false)}
             className={followButtonCSS}
           >
-            {followButtonText}
+            {inFollowersList ? "Unfollow" : "Follow"}
           </button>
         </div>
       </div>

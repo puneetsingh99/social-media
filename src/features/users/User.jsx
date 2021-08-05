@@ -16,11 +16,12 @@ import { UserDetails } from "./UserDetails";
 
 export const User = () => {
   const { userId } = useParams();
-  const { auth, loggedInUser } = useSelector((state) => state.auth);
-  console.log(loggedInUser);
+  const { auth } = useSelector((state) => state.auth);
+
   const { token } = auth;
   const userState = useSelector((state) => state.users);
   const postState = useSelector((state) => state.posts);
+
   const { postsByUser, postsByUserStatus } = postState;
   const navigate = useNavigate();
 
@@ -57,7 +58,7 @@ export const User = () => {
                 subHeading={`${postState.postsByUser.length} Posts`}
               />
             </div>
-            <div>{userState.user && <UserDetails user={userState.user} />}</div>
+            <div>{<UserDetails user={userState.user} />}</div>
 
             {postsByUserStatus === "loading" && <Loader />}
             {postsByUserStatus === "succeeded" && renderPosts}
