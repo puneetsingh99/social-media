@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Avatar } from "../../common/components";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getFollowButtonText } from "./utils/getFollowButtonText";
 import { getFollowButtonCSS } from "./utils/getFollowButtonCSS";
-import { updateFollowers } from "./usersSlice";
+import { updateFollowers, fetchUser } from "./usersSlice";
+import { useUserDetail } from "./hooks/useUserDetail";
 
-export const UserDetails = ({ user }) => {
+export const UserDetails = () => {
   const dispatch = useDispatch();
-  const { userId, token } = useSelector((state) => state.auth.auth);
-  const userState = useSelector((state) => state.users);
-  // console.log(userState.user, userState.allUsers);
+  const authState = useSelector((state) => state.auth.auth);
+  const { user } = useSelector((state) => state.users);
+
   const {
     _id,
     coverPic,
@@ -25,15 +25,21 @@ export const UserDetails = ({ user }) => {
   } = user;
 
   console.log("user from user details");
-  console.log({ user });
+  console.log({ followers });
 
-  const isLoggedInUser = _id === userId;
+  const isLoggedInUser = _id === authState.userId;
 
   const [inFollowersList, setInFollowersList] = useState(false);
+
   useEffect(() => {
-    const isAFollower = followers.find((user) => user._id === userId);
-    isAFollower ? setInFollowersList(true) : setInFollowersList(false);
-  }, [user, setInFollowersList]);
+    const isAFollower = followers.find(
+      (user) => user.toString() === authState.userId.toString()
+    );
+    console.log({ isAFollower });
+    isAFollower !== undefined
+      ? setInFollowersList(true)
+      : setInFollowersList(false);
+  }, [followers, setInFollowersList]);
 
   console.log({ inFollowersList });
   const [hoverState, setHoverState] = useState(false);
@@ -60,9 +66,9 @@ export const UserDetails = ({ user }) => {
                 ? console.log("Edit profile text")
                 : dispatch(
                     updateFollowers({
-                      loggedInUserId: userId,
+                      loggedInUserId: authState.userId,
                       userId: _id,
-                      token,
+                      token: authState.token,
                     })
                   );
             }}
@@ -70,7 +76,9 @@ export const UserDetails = ({ user }) => {
             onMouseLeave={() => setHoverState(false)}
             className={followButtonCSS}
           >
-            {inFollowersList ? "Unfollow" : "Follow"}
+            {followers.find((user) => user === authState.userId)
+              ? "Unfollow"
+              : "Follow"}
           </button>
         </div>
       </div>

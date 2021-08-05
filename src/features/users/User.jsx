@@ -58,7 +58,7 @@ export const User = () => {
                 subHeading={`${postState.postsByUser.length} Posts`}
               />
             </div>
-            <div>{<UserDetails user={userState.user} />}</div>
+            <div>{<UserDetails />}</div>
 
             {postsByUserStatus === "loading" && <Loader />}
             {postsByUserStatus === "succeeded" && renderPosts}
