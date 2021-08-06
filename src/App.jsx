@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { LoginForm } from "./features/auth/login/LoginForm";
 import { PrivateRoute } from "./common/components/PrivateRoute";
 import { SignupForm } from "./features/auth/signup/SignupForm";
-import { User } from "./features/users";
+import { Followers, User } from "./features/users";
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
       <Routes>
         <PrivateRoute path="/" element={<PostsList />} />
         <PrivateRoute path="/user/:userId" element={<User />} />
+        <PrivateRoute path="/user/:userId/followers" element={<Followers />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/signup" element={<SignupForm />} />
       </Routes>

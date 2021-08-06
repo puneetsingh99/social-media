@@ -20,7 +20,7 @@ export const PostExcerpt = ({ post }) => {
       </Link>
 
       <div className="w-full">
-        <div className="text-md flex items-center">
+        <div className="text-md flex items-start">
           <Link to={`/user/${_id}`} className="text-link">
             <h2 className="font-bold mr-1 hover:underline">{`${firstname} ${lastname}`}</h2>
           </Link>

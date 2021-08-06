@@ -45,7 +45,7 @@ export const User = () => {
       <section className="border border-outline border-t-0  border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
         {userState.user ? (
           <div>
-            <div className="flex-c border-b border-outline px-3  sticky z-30 top-0 bg-dark-3">
+            <div className="flex items-center border-b border-outline px-3  sticky z-30 top-0 bg-dark-3">
               <div
                 onClick={() => navigate(-1)}
                 className="p-1 rounded-full transparent-blue cursor-pointer text-brand mr-6"
@@ -58,7 +58,9 @@ export const User = () => {
                 subHeading={`${postState.postsByUser.length} Posts`}
               />
             </div>
-            <div>{<UserDetails user={userState.user} />}</div>
+            <div className="pb-6 border-b">
+              {<UserDetails user={userState.user} />}
+            </div>
 
             {postsByUserStatus === "loading" && <Loader />}
             {postsByUserStatus === "succeeded" && renderPosts}

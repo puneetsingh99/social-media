@@ -19,6 +19,11 @@ export const PrivateRoute = ({ path, element, ...props }) => {
 
       if (isTokenExpired) {
         loginUser = true;
+        //TODO:remove this line after testing
+        localStorage.setItem(
+          "socialMediaLogin",
+          JSON.stringify({ userId: "", isUserLoggedIn: false, token: "" })
+        );
       }
     } else {
       console.log("Login object not found in the localStorage");
