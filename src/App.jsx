@@ -12,7 +12,10 @@ function App() {
       <Routes>
         <PrivateRoute path="/" element={<PostsList />} />
         <PrivateRoute path="/user/:userId" element={<User />} />
-        <PrivateRoute path="/user/:userId/followers" element={<Followers />} />
+        <PrivateRoute
+          path="/user/:userId/:followersOrFollowing"
+          element={<Followers />}
+        />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/signup" element={<SignupForm />} />
       </Routes>

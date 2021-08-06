@@ -42,8 +42,8 @@ export const useFollow = ({ user }) => {
 
   const followButtonClicked = () => {
     if (isLoggedInUser) {
-      //dispatch appropriate function
-      console.log("THOU PROFILE SHALL BE EDIT THEE LOGGED IN USER");
+      //send update user request
+
       return;
     }
     if (isAFollower) {

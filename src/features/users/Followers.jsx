@@ -14,7 +14,7 @@ import {
 } from "../../common/components";
 
 export const Followers = () => {
-  const { userId } = useParams();
+  const { userId, followersOrFollowing } = useParams();
   const navigate = useNavigate();
   const { auth } = useSelector((state) => state.auth);
   const { token } = auth;
@@ -26,7 +26,10 @@ export const Followers = () => {
     dispatch(fetchUser({ userId, token }));
   }, [userId]);
 
-  const [showFollowers, setShowFollowers] = useState(true);
+  const [showFollowers, setShowFollowers] = useState(() =>
+    followersOrFollowing === "followers" ? true : false
+  );
+
   let renderUsers;
 
   if (userState.user) {

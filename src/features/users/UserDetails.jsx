@@ -36,7 +36,7 @@ export const UserDetails = ({ user }) => {
           }
         </p>
         <div className="flex gap-4 text-text-gray text-sm mt-3">
-          <Link to={`/user/${user._id}/followers`} className="link-text">
+          <Link to={`/user/${user._id}/following`} className="link-text">
             <p className="hover:underline cursor-pointer">
               <span className="font-md text-text-light font-bold mr-1">
                 {user.following.length}

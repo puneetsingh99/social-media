@@ -44,6 +44,22 @@ export const updateFollowers = createAsyncThunk(
       const response = await axios.post(updateFollowersAPI(userId), {
         loggedInUserId,
       });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const onFollowButtonClicked = createAsyncThunk(
+  "users/updateFollowers",
+  async ({ userId, loggedInUserId, token }, thunkAPI) => {
+    axios.defaults.headers.common["Authorization"] = token;
+    try {
+      const response = await axios.post(updateFollowersAPI(userId), {
+        loggedInUserId,
+      });
       console.log("update followers");
       console.log(response.data);
       return response.data;
@@ -94,7 +110,21 @@ export const usersSlice = createSlice({
       state.allUsers[loggedInUserIndex] = updatedLoggedInUser;
       state.allUsers[updatedUserIndex] = updatedUser;
       state.user = action.payload.updatedUser;
-      console.log("followers updated");
+    },
+
+    [onFollowButtonClicked.fulfilled]: (state, action) => {
+      const { updatedLoggedInUser, updatedUser } = action.payload;
+
+      const loggedInUserIndex = state.allUsers.findIndex(
+        (user) => user._id === updatedLoggedInUser._id
+      );
+
+      const updatedUserIndex = state.allUsers.findIndex(
+        (user) => user._id === updatedUser._id
+      );
+
+      state.allUsers[loggedInUserIndex] = updatedLoggedInUser;
+      state.allUsers[updatedUserIndex] = updatedUser;
     },
   },
 });
