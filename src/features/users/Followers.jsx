@@ -11,6 +11,7 @@ import {
   PageHeader,
   Loader,
   Error,
+  EmptyFeed,
 } from "../../common/components";
 
 export const Followers = () => {
@@ -24,7 +25,7 @@ export const Followers = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUser({ userId, token }));
-  }, [userId]);
+  }, [userId, userState.allUsers]);
 
   const [showFollowers, setShowFollowers] = useState(() =>
     followersOrFollowing === "followers" ? true : false
@@ -90,6 +91,9 @@ export const Followers = () => {
               </div>
             </nav>
             <section>{renderUsers}</section>
+            {renderUsers.length === 0 && (
+              <section>{<EmptyFeed message={"Such empty :("} />}</section>
+            )}
           </div>
         ) : (
           <Loader />
