@@ -35,6 +35,9 @@ export const PostsList = () => {
         <div className="h-3 bg-dark-3-hover border-b border-outline"></div>
         {posts.status === "loading" && <Loader />}
         {posts.status === "succeeded" && renderPosts}
+        {posts.status === "succeeded" && renderPosts.length === 0 && (
+          <EmptyFeed message={"Such empty :("} />
+        )}
         {posts.status === "failed" && <Error message={error} />}
       </section>
       <SideBar />

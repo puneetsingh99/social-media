@@ -9,6 +9,7 @@ import {
   PageHeader,
   Loader,
   Error,
+  EmptyFeed,
 } from "../../common/components";
 import { PostExcerpt } from "../posts/PostExcerpt";
 import { IoIosArrowRoundBack } from "react-icons/io";
@@ -58,12 +59,13 @@ export const User = () => {
                 subHeading={`${postState.postsByUser.length} Posts`}
               />
             </div>
-            <div className="pb-6 border-b">
-              {<UserDetails user={userState.user} />}
-            </div>
+            <div className="pb-6">{<UserDetails user={userState.user} />}</div>
 
             {postsByUserStatus === "loading" && <Loader />}
             {postsByUserStatus === "succeeded" && renderPosts}
+            {postsByUserStatus === "succeeded" && renderPosts.length === 0 && (
+              <EmptyFeed message={"Such empty :("} />
+            )}
             {postsByUserStatus === "failed" && <Error message={error} />}
           </div>
         ) : (
