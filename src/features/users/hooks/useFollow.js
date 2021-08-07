@@ -22,6 +22,8 @@ export const useFollow = ({ user }) => {
     return isAFollower ? followingState : followState;
   });
 
+  const [showEditProfile, setShowEditProfile] = useState(false);
+
   useEffect(() => {
     const isAFollower = followers.find((user) => user._id === authState.userId);
     const isLoggedInUser = user._id === authState.userId;
@@ -42,8 +44,7 @@ export const useFollow = ({ user }) => {
 
   const followButtonClicked = () => {
     if (isLoggedInUser) {
-      //send update user request
-
+      setShowEditProfile(true);
       return;
     }
     if (isAFollower) {
@@ -66,6 +67,8 @@ export const useFollow = ({ user }) => {
   return {
     followButtonStyle,
     followButtonClicked,
+    showEditProfile,
+    setShowEditProfile,
     ...user,
   };
 };

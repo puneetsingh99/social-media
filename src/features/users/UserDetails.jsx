@@ -2,9 +2,15 @@ import React from "react";
 import { Avatar } from "../../common/components";
 import { useFollow } from "./hooks/useFollow";
 import { Link } from "react-router-dom";
+import { EditProfile } from "./EditProfile";
 
 export const UserDetails = ({ user }) => {
-  const { followButtonClicked, followButtonStyle } = useFollow({ user });
+  const {
+    followButtonClicked,
+    followButtonStyle,
+    showEditProfile,
+    setShowEditProfile,
+  } = useFollow({ user });
 
   return (
     <section>
@@ -24,6 +30,9 @@ export const UserDetails = ({ user }) => {
           >
             {followButtonStyle.text}
           </button>
+          {showEditProfile && (
+            <EditProfile setShowEditProfile={setShowEditProfile} user={user} />
+          )}
         </div>
       </div>
       <div className="px-4">

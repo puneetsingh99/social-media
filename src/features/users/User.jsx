@@ -59,7 +59,14 @@ export const User = () => {
                 subHeading={`${postState.postsByUser.length} Posts`}
               />
             </div>
-            <div className="pb-6">{<UserDetails user={userState.user} />}</div>
+            <div className="pb-4">{<UserDetails user={userState.user} />}</div>
+            <div className="border-b border-outline">
+              <div className="px-4">
+                <p className="  py-3 text-brand font-bold border-b-4 border-brand w-max">
+                  Posts
+                </p>
+              </div>
+            </div>
 
             {postsByUserStatus === "loading" && <Loader />}
             {postsByUserStatus === "succeeded" && renderPosts}
