@@ -38,6 +38,22 @@ export const LoginForm = () => {
     }
   };
 
+  const guestLogin = (e) => {
+    e.preventDefault();
+    const credentials = { email: "puneet@gmail.com", password: "Puneet@123" };
+    const { isValid, message } = validateLoginForm(credentials);
+
+    if (!isValid) {
+      setValidationError(message);
+    }
+
+    if (isValid) {
+      console.log(auth);
+      dispatch(loginWithCredentials(credentials));
+      formDispatch({ type: "RST_FORM" });
+    }
+  };
+
   const inputFieldStyle = `w-full bg-black text-lg px-2 py-3  mb-6 rounded-md border-2 border-outline focus:border-transparent focus:outline-none focus:ring-2 ring-brand ring-opacity-60`;
 
   return (
@@ -74,10 +90,19 @@ export const LoginForm = () => {
           />
 
           <button
+            name="login"
             type="submit"
             className={`w-full border-brand bg-brand py-3 rounded-full mb-6 font-bold`}
           >
             {auth.status === "loading" ? "Logging in..." : "Log in"}
+          </button>
+          <button
+            name="guest login"
+            type="button"
+            onClick={guestLogin}
+            className={`w-full border-brand bg-brand py-3 rounded-full mb-6 font-bold`}
+          >
+            {auth.status === "loading" ? "Logging in..." : "Log in as Guest"}
           </button>
           <Link to={`/signup`} className="text-link">
             <p className="text-center text-brand hover:underline cursor-pointer">
