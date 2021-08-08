@@ -25,7 +25,7 @@ export const AddPostForm = () => {
     <article className="flex px-2 py-3 pb-1 border-b border-outline">
       <aside className="min-w-max px-3">
         <Link to={`/user/${userId}`} className="text-link">
-          <Avatar img={loggedInUser ? loggedInUser.profilePic : ""} />
+          <Avatar img={loggedInUser ? loggedInUser.profilePic : ""} hover />
         </Link>
       </aside>
       <div className="w-full py-4">

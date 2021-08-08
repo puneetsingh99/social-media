@@ -19,6 +19,7 @@ module.exports = {
         "text-light": "#FFFEFE",
         "text-gray": "#8898A7",
         "light-blue": "#173853",
+        "semi-trans": "rgba(0,0,0,0.3)",
       },
       width: {
         250: "250px",

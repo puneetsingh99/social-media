@@ -1,7 +1,7 @@
 import React from "react";
 import defaultPic from "../../assets/default_profile.png";
 
-export const Avatar = ({ img, size }) => {
+export const Avatar = ({ img, size, hover }) => {
   let avatarDimensions;
 
   switch (size) {
@@ -33,10 +33,17 @@ export const Avatar = ({ img, size }) => {
   const imgSrc = img || defaultPic;
 
   return (
-    <img
-      src={imgSrc}
-      alt="profile pic of the user"
-      className={`${avatarDimensions} rounded-full object-fit hover:bg-semi-transparent`}
-    />
+    <div className="relative rounded-full">
+      <img
+        src={imgSrc}
+        alt="profile pic of the user"
+        className={`${avatarDimensions} rounded-full object-fit`}
+      />
+      <div
+        className={`absolute inset-0 z-0 rounded-full ${
+          hover && "hover:bg-semi-trans"
+        } transition duration-200 ease-in-out`}
+      ></div>
+    </div>
   );
 };

@@ -28,7 +28,7 @@ export const PostsList = () => {
     <main className="max-w-1250 m-auto grid grid-cols-252">
       <NavDesktop />
       <section className="border border-outline border-t-0  border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
-        <div className="bg-dark-3 border-b border-outline sticky top-0">
+        <div className="bg-dark-3 border-b border-outline sticky top-0 z-10">
           <PageHeader heading={"Home"} />
         </div>
         <AddPostForm />

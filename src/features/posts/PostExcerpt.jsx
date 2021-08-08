@@ -14,7 +14,7 @@ export const PostExcerpt = ({ post }) => {
     >
       <Link to={`/user/${_id}`} className="text-link">
         <aside className="min-w-max px-3">
-          <Avatar img={profilePic} />
+          <Avatar img={profilePic} hover />
         </aside>
       </Link>
 
