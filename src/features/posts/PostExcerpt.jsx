@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import { Avatar } from "../../common/components";
 import { ReactionButtons } from "./ReactionButtons";
@@ -8,17 +8,18 @@ import { TimeAgo } from "../../common/components";
 export const PostExcerpt = ({ post }) => {
   const { author, content, image, video, createdAt } = post;
   const { _id, firstname, lastname, username, profilePic } = author;
+  // const [showComments, setShowComments] = useState(false);
 
   return (
     <article
       key={post._id}
       className="flex px-2 py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
     >
-      <Link to={`/user/${_id}`} className="text-link">
-        <aside className="min-w-max px-3">
+      <aside className="min-w-max px-3">
+        <Link to={`/user/${_id}`} className="text-link">
           <Avatar img={profilePic} hover />
-        </aside>
-      </Link>
+        </Link>
+      </aside>
 
       <div className="w-full">
         <div className="text-md flex items-center ">
@@ -49,9 +50,8 @@ export const PostExcerpt = ({ post }) => {
               </div>
             )}
           </div>
-
           <div className="w-full mt-2">
-            <ReactionButtons likes={post.likes} comments={post.comments} />
+            <ReactionButtons post={post} />
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { API_ALL_POSTS, getPostsByUserAPI } from "../../api";
+import { API_ALL_POSTS, getPostsByUserAPI, likePostAPI } from "../../api";
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   const response = await axios.get(API_ALL_POSTS);
@@ -32,6 +32,24 @@ export const addPost = createAsyncThunk(
         },
       });
       return response.data.savedPost;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const likePost = createAsyncThunk(
+  "posts/likePost",
+  async ({ postId, likedBy, token }, thunkAPI) => {
+    console.log("Before making request");
+    console.log({ postId, likedBy, token });
+    axios.defaults.headers.common["Authorization"] = token;
+    try {
+      const response = await axios.post(likePostAPI(postId), { likedBy });
+      console.log("Like post response");
+      console.log(response.data);
+      return response.data;
     } catch (error) {
       console.log(error);
       return thunkAPI.rejectWithValue(error.response.data);

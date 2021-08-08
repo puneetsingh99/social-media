@@ -9,5 +9,6 @@ export const getUserAPI = (userId) => `${API_ROOT}/user/${userId}`;
 export const getPostsByUserAPI = (userId) => `${API_ROOT}/user/${userId}/posts`;
 export const updateFollowersAPI = (userId) =>
   `${API_ROOT}/user/${userId}/follow`;
+export const likePostAPI = (postId) => `${API_ROOT}/post/${postId}/like`;
 
 export const editProfileAPI = (userId) => `${API_ROOT}/user/${userId}`;
