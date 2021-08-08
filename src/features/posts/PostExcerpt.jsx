@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 export const PostExcerpt = ({ post }) => {
   const { author, content, image, video } = post;
   const { _id, firstname, lastname, username, profilePic } = author;
-
   return (
     <article
       key={post._id}

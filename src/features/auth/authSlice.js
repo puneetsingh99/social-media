@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { API_LOGIN, API_SIGNUP } from "../../api";
 import { persistAuthState, setupAuthHeaders } from "./utils";
-import { getUserAPI } from "../../api";
+import { getUserAPI, editProfileAPI } from "../../api";
 
 const authReset = {
   isUserLoggedIn: false,
@@ -51,10 +51,29 @@ export const fetchLoggedInUser = createAsyncThunk(
   }
 );
 
+export const onEditProfileClicked = createAsyncThunk(
+  "auth/editProfile",
+  async ({ userId, formData, token }, thunkAPI) => {
+    axios.defaults.headers.common["Authorization"] = token;
+    try {
+      const response = await axios.post(editProfileAPI(userId), formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   status: "idle",
   auth: persistAuthState(),
   loggedInUser: null,
+  editProfileStatus: "idle",
   error: null,
 };
 
@@ -72,6 +91,11 @@ export const authSlice = createSlice({
       state.error = null;
       state.loggedInUser = null;
       delete axios.defaults.headers.common["Authorization"];
+    },
+    setEditProfileStatus: (state, action) => {
+      console.log("EDITING PROFILE STATUS");
+      console.log(action.payload);
+      state.editProfileStatus = "idle";
     },
   },
   extraReducers: {
@@ -122,12 +146,23 @@ export const authSlice = createSlice({
     [fetchLoggedInUser.fulfilled]: (state, action) => {
       state.loggedInUser = action.payload;
     },
+    [onEditProfileClicked.pending]: (state, action) => {
+      state.editProfileStatus = "loading";
+    },
+    [onEditProfileClicked.fulfilled]: (state, action) => {
+      state.editProfileStatus = "succeeded";
+      const { updatedUser } = action.payload;
+      state.loggedInUser = updatedUser;
+    },
+    [onEditProfileClicked.rejected]: (state, action) => {
+      state.editProfileStatus = "failed";
+    },
   },
 });
 
 export const selectAuth = (state) => state.auth;
 export const selectLoggedInUser = (state) => state.auth.loggedInUser;
 
-export const { logout, validateForm } = authSlice.actions;
+export const { logout, validateForm, setEditProfileStatus } = authSlice.actions;
 
 export default authSlice.reducer;
