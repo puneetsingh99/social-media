@@ -17,6 +17,8 @@ export const editProfileReducer = (state, action) => {
       return { ...state, newProfilePic: action.payload };
     case "SET_COVER_PIC":
       return { ...state, newCoverPic: action.payload };
+    case "RESET_USER":
+      return state;
     default:
       return state;
   }

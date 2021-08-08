@@ -21,6 +21,7 @@ export const Followers = () => {
   const { token } = auth;
 
   const userState = useSelector((state) => state.users);
+  console.log(userState.user);
 
   const dispatch = useDispatch();
   useEffect(() => {

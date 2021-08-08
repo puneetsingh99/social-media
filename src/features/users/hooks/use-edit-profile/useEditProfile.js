@@ -1,6 +1,11 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { onEditProfileClicked } from "../../../auth/authSlice";
 import { editProfileReducer } from "./editProfileReducer";
+
 export const useEditProfile = (user) => {
+  const { userId, token } = useSelector((state) => state.auth.auth);
+  const dispatch = useDispatch();
   const { firstname, lastname, bio, profilePic, coverPic } = user;
   const initialState = {
     firstname,
@@ -11,16 +16,30 @@ export const useEditProfile = (user) => {
     newProfilePic: null,
     newCoverPic: null,
   };
-  const [editProfile, dispatch] = useReducer(editProfileReducer, initialState);
-  console.log({
-    newProfilePic: editProfile.newProfilePic,
-    newCoverPic: editProfile.newCoverPic,
-    firstname: editProfile.firstname,
-    lastname: editProfile.lastname,
-    bio: editProfile.bio,
-  });
+  const [editProfile, editProfileDispatch] = useReducer(
+    editProfileReducer,
+    initialState
+  );
+  useEffect(() => {
+    editProfileDispatch({ type: "RESET_USER", payload: user });
+  }, [user]);
+
   const saveButtonClicked = () => {
-    console.log(editProfile);
+    const { bio, firstname, lastname, newProfilePic, newCoverPic } =
+      editProfile;
+
+    const formData = new FormData();
+    formData.append("newProfilePic", newProfilePic);
+    formData.append("newCoverPic", newCoverPic);
+    formData.append("bio", bio);
+    formData.append("firstname", firstname);
+    formData.append("lastname", lastname);
+    const params = {
+      userId,
+      formData,
+      token,
+    };
+    dispatch(onEditProfileClicked(params));
   };
-  return { editProfile, dispatch, saveButtonClicked };
+  return { editProfile, editProfileDispatch, saveButtonClicked };
 };

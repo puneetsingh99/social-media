@@ -39,11 +39,7 @@ export const UserDetails = ({ user }) => {
         <h2 className="text-xl font-extrabold line-height">{`${user.firstname} ${user.lastname}`}</h2>
         <p className="text-text-gray text-md line-height">{`@${user.username}`}</p>
 
-        <p className="text-md mt-2">
-          {
-            "Be kind to yourself. If you won’t, who will? Host of The Quest Pod "
-          }
-        </p>
+        <p className="text-md mt-2">{user.bio}</p>
         <div className="flex gap-4 text-text-gray text-sm mt-3">
           <Link to={`/user/${user._id}/following`} className="link-text">
             <p className="hover:underline cursor-pointer">

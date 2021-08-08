@@ -1,14 +1,34 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Avatar } from "../../common/components";
 import { CgClose } from "react-icons/cg";
 import { BiImageAdd } from "react-icons/bi";
 import { useEditProfile } from "./hooks/use-edit-profile/useEditProfile";
+import { setEditProfileStatus } from "../auth/authSlice";
 
 export const EditProfile = ({ setShowEditProfile, user }) => {
-  const { editProfile, dispatch, saveButtonClicked } = useEditProfile(user);
-  const { firstname, lastname, coverPic, profilePic, bio } = editProfile;
+  const dispatch = useDispatch();
+  const { editProfileStatus } = useSelector((state) => state.auth);
+  const { editProfile, editProfileDispatch, saveButtonClicked } =
+    useEditProfile(user);
+  const {
+    firstname,
+    lastname,
+    coverPic,
+    profilePic,
+    bio,
+    newProfilePic,
+    newCoverPic,
+  } = editProfile;
   const profilePicRef = useRef(null);
   const coverPicRef = useRef(null);
+
+  useEffect(() => {
+    if (editProfileStatus === "succeeded") {
+      dispatch(setEditProfileStatus("idle"));
+      setShowEditProfile(false);
+    }
+  }, [editProfileStatus]);
 
   return (
     <main className="m-auto z-30 fixed inset-0  bg-semi-transparent flex justify-center items-center">
@@ -24,7 +44,7 @@ export const EditProfile = ({ setShowEditProfile, user }) => {
             onClick={saveButtonClicked}
             className="border border-brand px-4 py-1 rounded-full font-bold text-white bg-brand"
           >
-            Save
+            {editProfileStatus === "loading" ? "Saving..." : "Save"}
           </button>
         </div>
 
@@ -33,11 +53,12 @@ export const EditProfile = ({ setShowEditProfile, user }) => {
             <img src={coverPic} alt="cover" className="w-full" />
             <div
               onClick={() => coverPicRef.current.click()}
-              className={
-                "absolute inset-0 rounded-full bg-semi-transparent flex-c"
-              }
+              className={"absolute inset-0 bg-semi-transparent flex-c"}
             >
-              <BiImageAdd size={35} />
+              <div className="flex flex-col justify-center items-center">
+                <BiImageAdd size={35} />
+                {newCoverPic && <p>{newCoverPic.name}</p>}
+              </div>
             </div>
             <input
               type="file"
@@ -45,7 +66,7 @@ export const EditProfile = ({ setShowEditProfile, user }) => {
               className="hidden"
               ref={coverPicRef}
               onChange={(e) =>
-                dispatch({
+                editProfileDispatch({
                   type: "SET_COVER_PIC",
                   payload: e.target.files[0],
                 })
@@ -62,7 +83,10 @@ export const EditProfile = ({ setShowEditProfile, user }) => {
                 "absolute inset-0 rounded-full bg-semi-transparent flex-c"
               }
             >
-              <BiImageAdd size={30} />
+              <div className="flex flex-col justify-center items-center">
+                <BiImageAdd size={30} />
+                {newProfilePic && <p>{"pic selected"}</p>}
+              </div>
             </div>
             <input
               type="file"
@@ -70,7 +94,7 @@ export const EditProfile = ({ setShowEditProfile, user }) => {
               className="hidden"
               ref={profilePicRef}
               onChange={(e) =>
-                dispatch({
+                editProfileDispatch({
                   type: "SET_PROFILE_PIC",
                   payload: e.target.files[0],
                 })
@@ -84,7 +108,7 @@ export const EditProfile = ({ setShowEditProfile, user }) => {
               type="text"
               value={firstname}
               onChange={(e) =>
-                dispatch({
+                editProfileDispatch({
                   type: "SET_FIRST_NAME",
                   payload: { firstname: e.target.value },
                 })
@@ -95,7 +119,7 @@ export const EditProfile = ({ setShowEditProfile, user }) => {
               type="text"
               value={lastname}
               onChange={(e) =>
-                dispatch({
+                editProfileDispatch({
                   type: "SET_LAST_NAME",
                   payload: { lastname: e.target.value },
                 })
@@ -107,7 +131,10 @@ export const EditProfile = ({ setShowEditProfile, user }) => {
             type="text"
             value={bio}
             onChange={(e) =>
-              dispatch({ type: "SET_BIO", payload: { bio: e.target.value } })
+              editProfileDispatch({
+                type: "SET_BIO",
+                payload: { bio: e.target.value },
+              })
             }
             className="w-full bg-dark-3  px-2 py-3  mb-6 rounded-md border-2 border-outline focus:border-transparent focus:outline-none focus:ring-2 ring-brand ring-opacity-60"
           />

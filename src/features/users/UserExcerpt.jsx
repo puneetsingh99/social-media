@@ -60,10 +60,7 @@ export const UserExcerpt = ({ user }) => {
               )}
             </div>
             <div>
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adi pisicing elit. Hic
-                etur adi pisicing elit. Hi
-              </p>
+              <p>{bio}</p>
             </div>
           </div>
         </article>
