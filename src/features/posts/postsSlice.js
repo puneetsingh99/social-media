@@ -21,10 +21,29 @@ export const fetchPostsByUser = createAsyncThunk(
   }
 );
 
+export const addPost = createAsyncThunk(
+  "posts/addPost",
+  async ({ post, token }, thunkAPI) => {
+    axios.defaults.headers.common["Authorization"] = token;
+    try {
+      const response = await axios.post(API_ALL_POSTS, post, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data.savedPost;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   status: "idle",
   posts: [],
   postsByUserStatus: "idle",
+  addPostStatus: "idle",
   postsByUser: [],
   error: null,
 };
@@ -32,7 +51,11 @@ const initialState = {
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {},
+  reducers: {
+    setAddPostStatus: (state, action) => {
+      state.addPostStatus = action.payload;
+    },
+  },
   extraReducers: {
     [fetchPosts.pending]: (state) => {
       state.status = "loading";
@@ -56,10 +79,21 @@ export const postsSlice = createSlice({
       state.postsByUserStatus = "failed";
       state.error = action.error.message;
     },
+    [addPost.pending]: (state, action) => {
+      state.addPostStatus = "loading";
+    },
+    [addPost.fulfilled]: (state, action) => {
+      state.addPostStatus = "succeeded";
+      state.posts.push(action.payload);
+    },
+    [addPost.rejected]: (state, action) => {
+      state.addPostStatus = "failed";
+      state.error = action.payload.message;
+    },
   },
 });
 
 export const selectAllPosts = (state) => state.posts;
 export const selectPostByUser = (state) => state.posts.postsByUser;
-
+export const { setAddPostStatus } = postsSlice.actions;
 export default postsSlice.reducer;

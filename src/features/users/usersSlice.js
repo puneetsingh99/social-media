@@ -1,11 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import {
-  API_ALL_USERS,
-  getUserAPI,
-  updateFollowersAPI,
-  editProfileAPI,
-} from "../../api";
+import { API_ALL_USERS, getUserAPI, updateFollowersAPI } from "../../api";
 
 const initialState = {
   status: "idle",

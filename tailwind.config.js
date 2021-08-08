@@ -40,6 +40,10 @@ module.exports = {
       maxWidth: {
         1250: "1220px",
       },
+      maxHeight: {
+        275: "275px",
+        300: "300px",
+      },
       gridTemplateColumns: {
         252: "2fr 5fr 3fr",
       },

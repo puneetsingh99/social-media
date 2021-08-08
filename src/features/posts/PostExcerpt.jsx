@@ -33,7 +33,7 @@ export const PostExcerpt = ({ post }) => {
             <p className="font-normal mb-4">{content}</p>
 
             {image && (
-              <div className="border border-outline rounded-2xl">
+              <div className="border border-outline rounded-2xl max-h-275 overflow-hidden">
                 <img
                   src={image}
                   alt={`a post by ${username}`}
