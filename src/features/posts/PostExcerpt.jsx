@@ -3,10 +3,12 @@ import ReactPlayer from "react-player";
 import { Avatar } from "../../common/components";
 import { ReactionButtons } from "./ReactionButtons";
 import { Link } from "react-router-dom";
+import { TimeAgo } from "../../common/components";
 
 export const PostExcerpt = ({ post }) => {
-  const { author, content, image, video } = post;
+  const { author, content, image, video, createdAt } = post;
   const { _id, firstname, lastname, username, profilePic } = author;
+
   return (
     <article
       key={post._id}
@@ -19,14 +21,14 @@ export const PostExcerpt = ({ post }) => {
       </Link>
 
       <div className="w-full">
-        <div className="text-md flex items-start">
+        <div className="text-md flex items-center ">
           <Link to={`/user/${_id}`} className="text-link">
             <h2 className="font-bold mr-1 hover:underline">{`${firstname} ${lastname}`}</h2>
           </Link>
           <p className="text-text-gray mr-1">{`@${username}`}</p>
-          <p className="text-text-gray ml-1">
-            <span className="text-sm">•</span> {` 5 minutes ago`}
-          </p>
+          <div className="text-text-gray">
+            <TimeAgo timestamp={createdAt} />
+          </div>
         </div>
         <div className="pr-4">
           <div>
@@ -49,7 +51,7 @@ export const PostExcerpt = ({ post }) => {
           </div>
 
           <div className="w-full mt-2">
-            <ReactionButtons />
+            <ReactionButtons likes={post.likes} comments={post.comments} />
           </div>
         </div>
       </div>

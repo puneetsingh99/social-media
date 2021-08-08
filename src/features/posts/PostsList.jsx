@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Error, Loader, NavDesktop, PageHeader } from "../../common/components";
 import { PostExcerpt } from "./PostExcerpt";
-import { fetchPosts, selectAllPosts } from "./postsSlice";
+import { fetchPosts } from "./postsSlice";
 import { SideBar } from "../../common/components/side-bar/SideBar";
 import { AddPostForm } from "./AddPostForm";
 
@@ -19,7 +19,10 @@ export const PostsList = () => {
   let renderPosts;
 
   if (posts.status === "succeeded") {
-    renderPosts = posts.posts.map((post) => {
+    const orderedPosts = posts.posts
+      .slice()
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    renderPosts = orderedPosts.map((post) => {
       return <PostExcerpt key={post._id} post={post} />;
     });
   }

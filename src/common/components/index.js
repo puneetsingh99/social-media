@@ -6,3 +6,4 @@ export { Avatar } from "./Avatar";
 export { NavDesktop } from "./nav/NavDesktop";
 export { PageHeader } from "./PageHeader";
 export { SideBar } from "./side-bar/SideBar";
+export { TimeAgo } from "./TimeAgo";

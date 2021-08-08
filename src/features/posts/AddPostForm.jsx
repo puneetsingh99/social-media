@@ -3,7 +3,6 @@ import { Avatar } from "../../common/components";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import { BsCameraVideo } from "react-icons/bs";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-
 import {
   selectAuth,
   selectLoggedInUser,
@@ -22,7 +21,6 @@ export const AddPostForm = () => {
   const { postState, postDispatch, postButtonClicked, addPostStatus } =
     usePost();
 
-  console.log(postState);
   const dispatch = useDispatch();
   useEffect(() => {
     if (isUserLoggedIn) {

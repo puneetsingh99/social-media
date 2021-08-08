@@ -35,7 +35,10 @@ export const User = () => {
   let renderPosts;
 
   if (postsByUserStatus === "succeeded") {
-    renderPosts = postsByUser.map((post) => {
+    const orderedPosts = postsByUser
+      .slice()
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    renderPosts = orderedPosts.map((post) => {
       return <PostExcerpt key={post._id} post={post} />;
     });
   }
