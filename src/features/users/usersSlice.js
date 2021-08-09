@@ -60,8 +60,6 @@ export const onFollowButtonClicked = createAsyncThunk(
       const response = await axios.post(updateFollowersAPI(userId), {
         loggedInUserId,
       });
-      console.log("update followers");
-      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error);
