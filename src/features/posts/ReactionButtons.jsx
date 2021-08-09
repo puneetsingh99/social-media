@@ -5,11 +5,11 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FiShare } from "react-icons/fi";
 import { likePost } from "./postsSlice";
 
-export const ReactionButtons = ({ post }) => {
+export const ReactionButtons = ({ post, setShowComments }) => {
   const { userId, token } = useSelector((state) => state.auth.auth);
   const { likes, comments, _id } = post;
   const commonClasses = `flex-c cursor-pointer rounded-full p-2`;
-  const alreadyLiked = likes.find((like) => like.likedBy === userId);
+  const alreadyLiked = likes.find((like) => like.likedBy._id === userId);
   const [postLiked, setPostLiked] = useState(() => alreadyLiked);
 
   const dispatch = useDispatch();
@@ -40,7 +40,10 @@ export const ReactionButtons = ({ post }) => {
           <p className="ml-2">{postLiked ? likes.length + 1 : likes.length}</p>
         )}
       </div>
-      <div className="flex-c hover:text-brand">
+      <div
+        onClick={() => setShowComments((currState) => !currState)}
+        className="flex-c hover:text-brand"
+      >
         <div className={`${commonClasses}  transparent-blue`} title="Comment">
           <GoComment size={18} />
         </div>
