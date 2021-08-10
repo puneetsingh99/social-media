@@ -7,6 +7,7 @@ import {
   SideBar,
   PageHeader,
   Loader,
+  EmptyFeed,
 } from "../../common/components";
 import { Notification } from "./components/Notification";
 
@@ -25,7 +26,13 @@ export const Notifications = () => {
 
   if (userState.user) {
     const notifications = userState.user.notifications.filter((n) => n.post);
-    renderNotifications = notifications.map((n) => {
+    const filteredNotifications = notifications.filter(
+      (n) => n.from._id !== userId
+    );
+    const orderedNotifications = filteredNotifications
+      .slice()
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    renderNotifications = orderedNotifications.map((n) => {
       const { from, type, post, createdAt } = n;
       const props = { from, type, postId: post._id, createdAt };
       return <Notification key={n._id} {...props} />;
@@ -41,7 +48,13 @@ export const Notifications = () => {
             <div className="flex items-center px-3  sticky z-30 top-0 bg-dark-3 border-b border-outline">
               <PageHeader heading={`Notifications`} />
             </div>
-            <section>{renderNotifications}</section>
+            <section>
+              {renderNotifications.length === 0 ? (
+                <EmptyFeed message={`No notifications`} />
+              ) : (
+                renderNotifications
+              )}
+            </section>
           </div>
         ) : (
           <Loader />
