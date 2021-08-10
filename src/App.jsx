@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { LoginForm } from "./features/auth/login/LoginForm";
 import { PrivateRoute } from "./common/components/PrivateRoute";
 import { SignupForm } from "./features/auth/signup/SignupForm";
-import { Followers, User } from "./features/users";
+import { Followers, User, Notifications } from "./features/users";
 import { Post, PostsList } from "./features/posts";
 
 function App() {
@@ -13,6 +13,8 @@ function App() {
         <PrivateRoute path="/" element={<PostsList />} />
         <PrivateRoute path="/post/:postId" element={<Post />} />
         <PrivateRoute path="/user/:userId" element={<User />} />
+        <PrivateRoute path="/user/notifications" element={<Notifications />} />
+
         <PrivateRoute
           path="/user/:userId/:followersOrFollowing"
           element={<Followers />}

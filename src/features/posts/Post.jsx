@@ -40,7 +40,6 @@ export const Post = () => {
         <div className="flex items-center border-b border-outline px-3  sticky z-30 top-0 bg-dark-3">
           <div
             onClick={() => {
-              console.log("back button clicked");
               navigate(-1);
             }}
             className="p-1 rounded-full transparent-blue cursor-pointer text-brand mr-3"
