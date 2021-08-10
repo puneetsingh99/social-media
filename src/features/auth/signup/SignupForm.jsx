@@ -38,10 +38,10 @@ export const SignupForm = () => {
     }
   };
 
-  const inputFieldStyle = `w-full bg-black text-lg px-2 py-3  mb-6 rounded-md border-2 border-outline focus:border-transparent focus:outline-none focus:ring-2 ring-brand ring-opacity-60`;
+  const inputFieldStyle = `w-full bg-dark-3 text-lg px-2 py-3  mb-6 rounded-md border-2 border-outline focus:border-transparent focus:outline-none focus:ring-2 ring-brand ring-opacity-60`;
 
   return (
-    <section className="min-h-screen pb-8 flex items-start justify-center bg-black">
+    <section className="min-h-screen pb-8 flex items-start justify-center bg-dark-3">
       <article className="w-full sm:w-450 px-2">
         <div className="py-4">
           <FaTwitter size={30} />
