@@ -8,15 +8,20 @@ import { FiLogOut } from "react-icons/fi";
 import { FaTwitter } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { appRoutes } from "./appRoutes";
+import { notificationStyle } from "./utils";
+import { Avatar } from "..";
 
 export const NavDesktop = () => {
   const { pathname } = useLocation();
-  const { userId } = useSelector((state) => state.auth.auth);
+  const { auth, loggedInUser } = useSelector((state) => state.auth);
+  const { userId } = auth;
+  const { firstname, lastname, username, profilePic } = loggedInUser;
+
   const dispatch = useDispatch();
+
   const { home, notifications } = appRoutes;
-  const notificationStyle = `flex text-xl font-extrabold gap-4 transparent-brand hover:text-brand border border-none px-4 py-3 rounded-full font-bold bg-brand w-max mb-2`;
+
   const profileRoute = `/user/${userId}`;
-  console.log(pathname === home);
 
   return (
     <aside className="hidden sm:block sticky top-0">
@@ -67,6 +72,22 @@ export const NavDesktop = () => {
           <FiLogOut size={25} />
           <h1>Logout</h1>
         </div>
+        <Link to={profileRoute} className="text-link">
+          <article className="flex px-4 py-3 cursor-pointer transparent-brand w-max rounded-full mt-12">
+            <aside className="min-w-max">
+              <Avatar img={profilePic} size={"md"} />
+            </aside>
+
+            <div className="w-full ml-3">
+              <div className="text-md w-full flex items-start justify-between">
+                <div>
+                  <h2 className="font-bold mr-1">{`${firstname} ${lastname}`}</h2>
+                  <p className="text-text-gray mr-1">{`@${username}`}</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </Link>
       </nav>
     </aside>
   );
