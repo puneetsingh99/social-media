@@ -5,7 +5,7 @@ import { TimeAgo } from "../../../common/components";
 import { useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 
-export const Comment = ({ comment, onDeleteButtonClicked }) => {
+export const Comment = ({ comment, onRemoveButtonClicked }) => {
   const { madeBy, content, createdAt } = comment;
   const { firstname, lastname, username, profilePic, _id } = madeBy;
   const { userId } = useSelector((state) => state.auth.auth);
@@ -20,7 +20,7 @@ export const Comment = ({ comment, onDeleteButtonClicked }) => {
         </Link>
       </aside>
       <div className="w-full">
-        <div className="text-md flex items-center ">
+        <div className="text-md flex items-center">
           <Link to={`/user/${_id}`} className="text-link">
             <h2 className="font-bold mr-1 hover:underline">{`${firstname} ${lastname}`}</h2>
           </Link>
@@ -36,11 +36,14 @@ export const Comment = ({ comment, onDeleteButtonClicked }) => {
         </div>
       </div>
       {loggedInUsersComment && (
-        <div
-          onClick={() => onDeleteButtonClicked(comment._id)}
-          className="flex-c text-text-gray hover:text-red-500 px-1  transition duration-200"
-        >
-          <MdDelete size={18} />
+        <div>
+          <div
+            title="Remove this comment"
+            onClick={() => onRemoveButtonClicked(comment._id)}
+            className="p-1 rounded-full transparent-pink flex-c text-text-gray hover:text-red-500   transition duration-200"
+          >
+            <MdDelete size={18} />
+          </div>
         </div>
       )}
     </article>

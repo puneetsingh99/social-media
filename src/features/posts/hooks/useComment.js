@@ -36,7 +36,7 @@ export const useComment = (post) => {
     dispatch(addComment(params));
   };
 
-  const onDeleteButtonClicked = (commentId) => {
+  const onRemoveButtonClicked = (commentId) => {
     const params = { postId: post._id, commentId, token };
     dispatch(deleteComment(params));
   };
@@ -46,6 +46,6 @@ export const useComment = (post) => {
     setComment,
     onReplyClicked,
     addCommentStatus,
-    onDeleteButtonClicked,
+    onRemoveButtonClicked,
   };
 };

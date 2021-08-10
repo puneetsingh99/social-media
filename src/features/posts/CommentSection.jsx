@@ -9,7 +9,7 @@ export const CommentSection = ({ comments, post }) => {
     setComment,
     onReplyClicked,
     addCommentStatus,
-    onDeleteButtonClicked,
+    onRemoveButtonClicked,
   } = useComment(post);
 
   const orderedComments = comments
@@ -20,7 +20,7 @@ export const CommentSection = ({ comments, post }) => {
     <Comment
       key={comment._id}
       comment={comment}
-      onDeleteButtonClicked={onDeleteButtonClicked}
+      onRemoveButtonClicked={onRemoveButtonClicked}
     />
   ));
 
@@ -44,6 +44,7 @@ export const CommentSection = ({ comments, post }) => {
         />
         <div>
           <button
+            title="Reply to this post"
             disabled={loading}
             onClick={onReplyClicked}
             className={`border border-brand px-4 py-1 self-start rounded-full font-bold text-brand transparent-brand ${

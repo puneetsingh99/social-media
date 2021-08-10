@@ -1,8 +1,7 @@
 import React, { useReducer, useEffect } from "react";
-import { addPost } from "../postsSlice";
+import { addPost, setStatus } from "../postsSlice";
 import { postReducer } from "./postReducer";
 import { useSelector, useDispatch } from "react-redux";
-import { setAddPostStatus } from "../postsSlice";
 
 export const usePost = () => {
   const { userId, token } = useSelector((state) => state.auth.auth);
@@ -19,7 +18,7 @@ export const usePost = () => {
   useEffect(() => {
     if (addPostStatus === "succeeded") {
       postDispatch({ type: "RESET_FORM" });
-      dispatch(setAddPostStatus("idle"));
+      dispatch(setStatus({ name: "addPostStatus", value: "idle" }));
     }
   }, [addPostStatus]);
 

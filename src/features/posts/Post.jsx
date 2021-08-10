@@ -3,13 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { Error, Loader, NavDesktop, PageHeader } from "../../common/components";
 import { fetchPost } from "./postsSlice";
 import { SideBar } from "../../common/components/side-bar/SideBar";
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { PostDetail } from "./PostDetail";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { setStatus } from "./postsSlice";
 
 export const Post = () => {
   const { token } = useSelector((state) => state.auth.auth);
-  const { post, fetchPostStatus, error } = useSelector((state) => state.posts);
+  const { fetchPostStatus, error, removePostStatus, post } = useSelector(
+    (state) => state.posts
+  );
   const { postId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,6 +20,18 @@ export const Post = () => {
   useEffect(() => {
     dispatch(fetchPost({ postId, token }));
   }, [postId]);
+
+  useEffect(() => {
+    if (removePostStatus === "succeeded") {
+      dispatch(setStatus({ name: "removePostStatus", value: "idle" }));
+    }
+  }, [removePostStatus]);
+
+  let renderPost;
+
+  if (fetchPostStatus === "succeeded") {
+    renderPost = post ? <PostDetail /> : <Navigate to={"/"} />;
+  }
 
   return (
     <main className="max-w-1250 m-auto grid grid-cols-252">
@@ -33,7 +48,9 @@ export const Post = () => {
           <PageHeader heading={`Post`} />
         </div>
         {fetchPostStatus === "loading" && <Loader />}
-        {fetchPostStatus === "succeeded" && <PostDetail post={post} />}
+
+        {fetchPostStatus === "succeeded" && renderPost}
+
         {fetchPostStatus === "failed" && <Error message={error} />}
       </section>
       <SideBar />

@@ -15,7 +15,7 @@ export const PostExcerpt = ({ post }) => {
   return (
     <>
       <article
-        onClick={() => navigate(`post/${post._id}`)}
+        onClick={() => navigate(`/post/${post._id}`)}
         key={post._id}
         className="flex px-2 py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
       >

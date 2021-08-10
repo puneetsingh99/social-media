@@ -34,7 +34,6 @@ export const fetchPost = createAsyncThunk(
     axios.defaults.headers.common["Authorization"] = token;
     try {
       const response = await axios.get(getPostAPI(postId));
-      console.log(response.data);
       return response.data.post;
     } catch (error) {
       console.log(error);
@@ -54,6 +53,20 @@ export const addPost = createAsyncThunk(
         },
       });
       return response.data.savedPost;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const removePost = createAsyncThunk(
+  "posts/removePost",
+  async ({ postId, token }, thunkAPI) => {
+    axios.defaults.headers.common["Authorization"] = token;
+    try {
+      const response = await axios.delete(getPostAPI(postId));
+      return { ...response.data, postId };
     } catch (error) {
       console.log(error);
       return thunkAPI.rejectWithValue(error.response.data);
@@ -116,6 +129,7 @@ const initialState = {
   postsByUserStatus: "idle",
   fetchPostStatus: "idle",
   addPostStatus: "idle",
+  removePostStatus: "idle",
   addCommentStatus: "idle",
   error: null,
 };
@@ -130,9 +144,6 @@ export const postsSlice = createSlice({
     },
     setAddPostStatus: (state, action) => {
       state.addPostStatus = action.payload;
-    },
-    setAddCommentStatus: (state, action) => {
-      state.addCommentStatus = action.payload;
     },
   },
   extraReducers: {
@@ -178,6 +189,36 @@ export const postsSlice = createSlice({
     },
     [addPost.rejected]: (state, action) => {
       state.addPostStatus = "failed";
+      state.error = action.payload.message;
+    },
+    [removePost.pending]: (state) => {
+      state.removePostStatus = "loading";
+    },
+    [removePost.fulfilled]: (state, action) => {
+      const { postId } = action.payload;
+      const allPostsPostIndex = state.posts.findIndex(
+        (post) => post._id === postId
+      );
+      const postsByUserIndex = state.postsByUser.findIndex(
+        (post) => post._id === postId
+      );
+
+      if (state.post) {
+        if (state.post._id === postId) {
+          state.post = null;
+        }
+      }
+
+      if (allPostsPostIndex !== -1) {
+        state.posts.splice(allPostsPostIndex, 1);
+      }
+
+      if (postsByUserIndex !== -1) {
+        state.postsByUser.splice(allPostsPostIndex, 1);
+      }
+    },
+    [removePost.rejected]: (state, action) => {
+      state.removePostStatus = "failed";
       state.error = action.payload.message;
     },
     [addComment.pending]: (state, action) => {
@@ -239,5 +280,5 @@ export const postsSlice = createSlice({
 
 export const selectAllPosts = (state) => state.posts;
 export const selectPostByUser = (state) => state.posts.postsByUser;
-export const { setAddPostStatus, setStatus } = postsSlice.actions;
+export const { setStatus } = postsSlice.actions;
 export default postsSlice.reducer;

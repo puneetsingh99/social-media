@@ -2,20 +2,28 @@ import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import { Avatar } from "../../common/components";
 import { ReactionButtons } from "./ReactionButtons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { TimeAgo } from "../../common/components";
 import { CommentSection } from "./CommentSection";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { BiDotsVerticalRounded } from "react-icons/bi";
+import { removePost } from "./postsSlice";
 
-export const PostDetail = ({ post }) => {
-  const { userId } = useSelector((state) => state.auth.auth);
+export const PostDetail = () => {
+  const { userId, token } = useSelector((state) => state.auth.auth);
+  const { post } = useSelector((state) => state.posts);
+  const navigate = useNavigate();
 
   const { author, content, image, video, createdAt, comments } = post;
   const { _id, firstname, lastname, username, profilePic } = author;
 
   const [showComments, setShowComments] = useState(false);
-  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const onRemoveButtonClicked = () => {
+    dispatch(removePost({ postId: post._id, token }));
+  };
 
   const loggedInUsersPost = userId === _id;
 
@@ -49,6 +57,16 @@ export const PostDetail = ({ post }) => {
             <div className="px-2 hover:text-brand">
               {loggedInUsersPost && <BiDotsVerticalRounded size={20} />}
             </div>
+            {loggedInUsersPost && (
+              <p
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onRemoveButtonClicked();
+                }}
+              >
+                del
+              </p>
+            )}
           </div>
           <div className="pr-4">
             <div>

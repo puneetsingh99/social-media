@@ -30,6 +30,8 @@ export const EditProfile = ({ setShowEditProfile, user }) => {
     }
   }, [editProfileStatus]);
 
+  const loading = editProfileStatus === "loading";
+
   return (
     <main className="m-auto z-30 fixed inset-0  bg-semi-transparent flex justify-center items-center">
       <section className="w-550 bg-dark-3 overflow-hidden rounded-2xl h-5/6 m-auto">
@@ -41,10 +43,13 @@ export const EditProfile = ({ setShowEditProfile, user }) => {
             <CgClose size={22} />
           </div>
           <button
+            disabled={loading}
             onClick={saveButtonClicked}
-            className="border border-brand px-4 py-1 rounded-full font-bold text-white bg-brand"
+            className={`border border-brand px-4 py-1 rounded-full font-bold text-white bg-brand ${
+              loading && "cursor-wait"
+            }`}
           >
-            {editProfileStatus === "loading" ? "Saving..." : "Save"}
+            {loading ? "Saving..." : "Save"}
           </button>
         </div>
 

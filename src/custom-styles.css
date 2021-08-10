@@ -61,6 +61,7 @@ thin scrollbar
 ::-webkit-scrollbar {
   width: 8px;
   border-radius: 100%;
+  display: none;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   -ms-border-radius: 100%;
