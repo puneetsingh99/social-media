@@ -10,9 +10,9 @@ module.exports = {
       colors: {
         "dark-3": "#14212B",
         "dark-3-hover": "#1C2633",
-        "dark-2": "#163142",
+        "dark-2": "#253240",
         "dark-gray": "#6A7176",
-        "dark-1": "#243447",
+        "dark-1": "#6E5A40",
         outline: "#38444D",
         brand: "#1DA1F2",
         brandPink: "#E1245F",
