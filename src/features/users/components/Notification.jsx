@@ -8,7 +8,7 @@ export const Notification = ({ from, type, postId, createdAt }) => {
     <Link to={`/post/${postId}`} className="text-link">
       <article className="flex px-2 py-3 border-b border-outline cursor-pointer hover:bg-dark-3-hover">
         <aside className="min-w-max px-3">
-          <Avatar img={profilePic} />
+          <Avatar img={profilePic} size={"md"} />
         </aside>
 
         <div className="w-full">
