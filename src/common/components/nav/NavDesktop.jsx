@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchLoggedInUser, logout } from "../../../features/auth/authSlice";
+import { logout } from "../../../features/auth/authSlice";
 import { RiHome7Line } from "react-icons/ri";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { HiOutlineUser } from "react-icons/hi";
