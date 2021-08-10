@@ -60,10 +60,20 @@ thin scrollbar
 
 ::-webkit-scrollbar {
   width: 8px;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
 }
 
 ::-webkit-scrollbar-track {
   background: inherit;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
 }
 
 ::-webkit-scrollbar-thumb {

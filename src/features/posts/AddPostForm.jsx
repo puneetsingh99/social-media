@@ -28,6 +28,8 @@ export const AddPostForm = () => {
     }
   }, [isUserLoggedIn, userId, dispatch]);
 
+  const loading = addPostStatus === "loading";
+
   return (
     <article className="flex px-2 py-3 pb-1 border-b border-outline">
       <aside className="min-w-max px-3">
@@ -113,10 +115,13 @@ export const AddPostForm = () => {
             </div>
             <div className="pr-4 flex-c w-max inline-block ml-2">
               <button
+                disabled={loading}
                 onClick={postButtonClicked}
-                className="border-brand px-4 py-2 rounded-full text-md font-bold text-white bg-brand"
+                className={`border-brand px-4 py-2 rounded-full text-md font-bold text-white bg-brand ${
+                  loading && "cursor-wait"
+                }`}
               >
-                {addPostStatus === "loading" ? "Posting..." : "Post"}
+                {loading ? "Posting..." : "Post"}
               </button>
             </div>
           </div>

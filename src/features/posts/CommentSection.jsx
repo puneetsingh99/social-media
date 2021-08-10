@@ -24,6 +24,8 @@ export const CommentSection = ({ comments, post }) => {
     />
   ));
 
+  const loading = addCommentStatus === "loading";
+
   return (
     <section className="p-4 border-b border-outline">
       <div className="flex-c gap-4 pl-4">
@@ -42,15 +44,20 @@ export const CommentSection = ({ comments, post }) => {
         />
         <div>
           <button
+            disabled={loading}
             onClick={onReplyClicked}
-            className={`border border-brand px-4 py-1 self-start rounded-full font-bold text-brand transparent-brand`}
+            className={`border border-brand px-4 py-1 self-start rounded-full font-bold text-brand transparent-brand ${
+              loading && "cursor-wait"
+            }`}
           >
-            {addCommentStatus === "loading" ? "Replying..." : "Reply"}
+            {loading ? "Replying..." : "Reply"}
           </button>
         </div>
       </div>
       {commentList.length > 0 && (
-        <section className="mt-2">{commentList}</section>
+        <section className="mt-2 max-h-300 overflow-scroll overflow-x-hidden">
+          {commentList}
+        </section>
       )}
     </section>
   );

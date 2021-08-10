@@ -27,7 +27,10 @@ export const ReactionButtons = ({ post, setShowComments }) => {
   return (
     <article className="flex justify-between items-center w-4/6 text-text-gray">
       <div
-        onClick={likeButtonClicked}
+        onClick={(e) => {
+          e.stopPropagation();
+          likeButtonClicked();
+        }}
         className={`flex-c hover:text-pink-500 ${postLiked && "text-pink-500"}`}
       >
         <div className={`${commonClasses} transparent-pink`} title="Like">
@@ -41,7 +44,10 @@ export const ReactionButtons = ({ post, setShowComments }) => {
         )}
       </div>
       <div
-        onClick={() => setShowComments((currState) => !currState)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setShowComments((currState) => !currState);
+        }}
         className="flex-c hover:text-brand"
       >
         <div className={`${commonClasses}  transparent-blue`} title="Comment">
@@ -51,6 +57,7 @@ export const ReactionButtons = ({ post, setShowComments }) => {
       </div>
 
       <div
+        onClick={(e) => e.stopPropagation()}
         className={` ${commonClasses} p-4 hover:text-brand transparent-blue`}
         title="Share"
       >

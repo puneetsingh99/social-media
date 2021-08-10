@@ -5,26 +5,29 @@ import { ReactionButtons } from "./ReactionButtons";
 import { Link, useNavigate } from "react-router-dom";
 import { TimeAgo } from "../../common/components";
 import { CommentSection } from "./CommentSection";
+import { useSelector } from "react-redux";
+import { BiDotsVerticalRounded } from "react-icons/bi";
 
-export const PostExcerpt = ({ post }) => {
+export const PostDetail = ({ post }) => {
+  const { userId } = useSelector((state) => state.auth.auth);
+
   const { author, content, image, video, createdAt, comments } = post;
   const { _id, firstname, lastname, username, profilePic } = author;
+
   const [showComments, setShowComments] = useState(false);
   const navigate = useNavigate();
+
+  const loggedInUsersPost = userId === _id;
 
   return (
     <>
       <article
-        onClick={() => navigate(`post/${post._id}`)}
+        onClick={() => navigate(`/post/${post._id}`)}
         key={post._id}
         className="flex px-2 py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
       >
-        <aside className="min-w-max px-3">
-          <Link
-            onClick={(e) => e.stopPropagation()}
-            to={`/user/${_id}`}
-            className="text-link"
-          >
+        <aside onClick={(e) => e.stopPropagation()} className="min-w-max px-3">
+          <Link to={`/user/${_id}`} className="text-link">
             <Avatar img={profilePic} hover />
           </Link>
         </aside>
@@ -43,10 +46,13 @@ export const PostExcerpt = ({ post }) => {
                 <TimeAgo timestamp={createdAt} />
               </div>
             </div>
+            <div className="px-2 hover:text-brand">
+              {loggedInUsersPost && <BiDotsVerticalRounded size={20} />}
+            </div>
           </div>
           <div className="pr-4">
             <div>
-              <p className="font-normal mb-4">{content}</p>
+              <p className="font-normal mb-4 text-2xl">{content}</p>
 
               {image && (
                 <div className="border border-outline rounded-2xl max-h-275 overflow-hidden">

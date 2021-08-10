@@ -4,6 +4,7 @@ import {
   addCommentAPI,
   API_ALL_POSTS,
   deleteCommentAPI,
+  getPostAPI,
   getPostsByUserAPI,
   likePostAPI,
 } from "../../api";
@@ -20,6 +21,21 @@ export const fetchPostsByUser = createAsyncThunk(
     try {
       const response = await axios.get(getPostsByUserAPI(userId));
       return response.data.posts;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchPost = createAsyncThunk(
+  "posts/fetchPost",
+  async ({ postId, token }, thunkAPI) => {
+    axios.defaults.headers.common["Authorization"] = token;
+    try {
+      const response = await axios.get(getPostAPI(postId));
+      console.log(response.data);
+      return response.data.post;
     } catch (error) {
       console.log(error);
       return thunkAPI.rejectWithValue(error.response.data);
@@ -95,10 +111,12 @@ export const deleteComment = createAsyncThunk(
 const initialState = {
   status: "idle",
   posts: [],
+  postsByUser: [],
+  post: null,
   postsByUserStatus: "idle",
+  fetchPostStatus: "idle",
   addPostStatus: "idle",
   addCommentStatus: "idle",
-  postsByUser: [],
   error: null,
 };
 
@@ -140,6 +158,17 @@ export const postsSlice = createSlice({
       state.postsByUserStatus = "failed";
       state.error = action.error.message;
     },
+    [fetchPost.pending]: (state, action) => {
+      state.fetchPostStatus = "loading";
+    },
+    [fetchPost.fulfilled]: (state, action) => {
+      state.fetchPostStatus = "succeeded";
+      state.post = action.payload;
+    },
+    [fetchPost.rejected]: (state, action) => {
+      state.fetchPostStatus = "failed";
+      state.error = action.payload.message;
+    },
     [addPost.pending]: (state, action) => {
       state.addPostStatus = "loading";
     },
@@ -164,6 +193,12 @@ export const postsSlice = createSlice({
         (post) => post._id === postId
       );
 
+      if (state.post) {
+        if (state.post._id === postId) {
+          state.post = action.payload;
+        }
+      }
+
       if (allPostsPostIndex !== -1) {
         state.posts[allPostsPostIndex] = action.payload;
       }
@@ -184,6 +219,12 @@ export const postsSlice = createSlice({
       const postsByUserIndex = state.postsByUser.findIndex(
         (post) => post._id === postId
       );
+
+      if (state.post) {
+        if (state.post._id === postId) {
+          state.post = action.payload;
+        }
+      }
 
       if (allPostsPostIndex !== -1) {
         state.posts[allPostsPostIndex] = action.payload;
