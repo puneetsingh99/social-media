@@ -74,6 +74,20 @@ export const removePost = createAsyncThunk(
   }
 );
 
+export const updatePost = createAsyncThunk(
+  "posts/updatePost",
+  async ({ postId, updateData, token }, thunkAPI) => {
+    axios.defaults.headers.common["Authorization"] = token;
+    try {
+      const response = await axios.post(getPostAPI(postId), updateData);
+      return response.data.updatedPost;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const likePost = createAsyncThunk(
   "posts/likePost",
   async ({ postId, likedBy, token }, thunkAPI) => {
@@ -130,6 +144,7 @@ const initialState = {
   fetchPostStatus: "idle",
   addPostStatus: "idle",
   removePostStatus: "idle",
+  updatePostStatus: "idle",
   addCommentStatus: "idle",
   error: null,
 };
@@ -139,8 +154,8 @@ export const postsSlice = createSlice({
   initialState,
   reducers: {
     setStatus: (state, action) => {
-      const { statusName, statusValue } = action.payload;
-      state[statusName] = statusValue;
+      const { name, value } = action.payload;
+      state[name] = value;
     },
     setAddPostStatus: (state, action) => {
       state.addPostStatus = action.payload;
@@ -195,6 +210,7 @@ export const postsSlice = createSlice({
       state.removePostStatus = "loading";
     },
     [removePost.fulfilled]: (state, action) => {
+      state.removePostStatus = "succeeded";
       const { postId } = action.payload;
       const allPostsPostIndex = state.posts.findIndex(
         (post) => post._id === postId
@@ -219,6 +235,37 @@ export const postsSlice = createSlice({
     },
     [removePost.rejected]: (state, action) => {
       state.removePostStatus = "failed";
+      state.error = action.payload.message;
+    },
+    [updatePost.pending]: (state) => {
+      state.updatePostStatus = "loading";
+    },
+    [updatePost.fulfilled]: (state, action) => {
+      state.updatePostStatus = "succeeded";
+      const postId = action.payload._id;
+      const allPostsPostIndex = state.posts.findIndex(
+        (post) => post._id === postId
+      );
+      const postsByUserIndex = state.postsByUser.findIndex(
+        (post) => post._id === postId
+      );
+
+      if (state.post) {
+        if (state.post._id === postId) {
+          state.post = action.payload;
+        }
+      }
+
+      if (allPostsPostIndex !== -1) {
+        state.posts[allPostsPostIndex] = action.payload;
+      }
+
+      if (postsByUserIndex !== -1) {
+        state.postsByUser[postsByUserIndex] = action.payload;
+      }
+    },
+    [updatePost.rejected]: (state, action) => {
+      state.updatePostStatus = "failed";
       state.error = action.payload.message;
     },
     [addComment.pending]: (state, action) => {

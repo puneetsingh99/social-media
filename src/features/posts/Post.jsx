@@ -39,7 +39,10 @@ export const Post = () => {
       <section className="border border-outline border-t-0  border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
         <div className="flex items-center border-b border-outline px-3  sticky z-30 top-0 bg-dark-3">
           <div
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              console.log("back button clicked");
+              navigate(-1);
+            }}
             className="p-1 rounded-full transparent-blue cursor-pointer text-brand mr-3"
           >
             <IoIosArrowRoundBack size={30} />

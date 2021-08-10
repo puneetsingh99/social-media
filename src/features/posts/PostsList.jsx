@@ -5,7 +5,6 @@ import { PostExcerpt } from "./PostExcerpt";
 import { fetchPosts } from "./postsSlice";
 import { SideBar } from "../../common/components/side-bar/SideBar";
 import { AddPostForm } from "./AddPostForm";
-import { Link } from "react-router-dom";
 
 export const PostsList = () => {
   const posts = useSelector((state) => state.posts);

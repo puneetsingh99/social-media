@@ -2,22 +2,25 @@ import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import { Avatar } from "../../common/components";
 import { ReactionButtons } from "./ReactionButtons";
-import { Link, useNavigate, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TimeAgo } from "../../common/components";
 import { CommentSection } from "./CommentSection";
 import { useSelector, useDispatch } from "react-redux";
-import { BiDotsVerticalRounded } from "react-icons/bi";
+import { MdDelete } from "react-icons/md";
+import { FiEdit2 } from "react-icons/fi";
 import { removePost } from "./postsSlice";
+import { EditPost } from "./components/EditPost";
 
 export const PostDetail = () => {
   const { userId, token } = useSelector((state) => state.auth.auth);
-  const { post } = useSelector((state) => state.posts);
+  const { post, updatePostStatus } = useSelector((state) => state.posts);
   const navigate = useNavigate();
 
   const { author, content, image, video, createdAt, comments } = post;
   const { _id, firstname, lastname, username, profilePic } = author;
 
   const [showComments, setShowComments] = useState(false);
+  const [showEditor, setShowEditor] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -26,6 +29,7 @@ export const PostDetail = () => {
   };
 
   const loggedInUsersPost = userId === _id;
+  const editorParams = { content, postId: post._id, setShowEditor };
 
   return (
     <>
@@ -54,23 +58,37 @@ export const PostDetail = () => {
                 <TimeAgo timestamp={createdAt} />
               </div>
             </div>
-            <div className="px-2 hover:text-brand">
-              {loggedInUsersPost && <BiDotsVerticalRounded size={20} />}
-            </div>
             {loggedInUsersPost && (
-              <p
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onRemoveButtonClicked();
-                }}
-              >
-                del
-              </p>
+              <div className="flex gap-4">
+                <div
+                  className="p-2 rounded-full transparent-pink flex-c text-text-gray hover:text-red-500   transition duration-200"
+                  title="Remove this comment"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onRemoveButtonClicked();
+                  }}
+                >
+                  <MdDelete size={22} />
+                </div>
+                <p
+                  className="p-2 rounded-full transparent-brand flex-c text-text-gray hover:text-brand   transition duration-200"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowEditor((currState) => !currState);
+                  }}
+                >
+                  <FiEdit2 size={20} />
+                </p>
+              </div>
             )}
           </div>
           <div className="pr-4">
             <div>
-              <p className="font-normal mb-4 text-2xl">{content}</p>
+              {showEditor ? (
+                <EditPost {...editorParams} />
+              ) : (
+                <p className="font-normal mb-4 text-xl">{content}</p>
+              )}
 
               {image && (
                 <div className="border border-outline rounded-2xl max-h-275 overflow-hidden">
