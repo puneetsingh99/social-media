@@ -38,14 +38,14 @@ module.exports = {
         350: "350px",
       },
       maxWidth: {
-        1250: "1220px",
+        1250: "1275px",
       },
       maxHeight: {
         275: "275px",
         300: "300px",
       },
       gridTemplateColumns: {
-        252: "2.5fr 6fr 2.5fr",
+        252: "2fr 5fr 3fr",
       },
     },
   },
