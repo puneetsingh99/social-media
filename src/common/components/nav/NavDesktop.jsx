@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../../features/auth/authSlice";
+import { fetchLoggedInUser, logout } from "../../../features/auth/authSlice";
 import { RiHome7Line } from "react-icons/ri";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { HiOutlineUser } from "react-icons/hi";
@@ -15,7 +15,6 @@ export const NavDesktop = () => {
   const { pathname } = useLocation();
   const { auth, loggedInUser } = useSelector((state) => state.auth);
   const { userId } = auth;
-  const { firstname, lastname, username, profilePic } = loggedInUser;
 
   const dispatch = useDispatch();
 
@@ -73,20 +72,22 @@ export const NavDesktop = () => {
           <h1>Logout</h1>
         </div>
         <Link to={profileRoute} className="text-link">
-          <article className="flex px-4 py-3 cursor-pointer transparent-brand w-max rounded-full mt-12">
-            <aside className="min-w-max">
-              <Avatar img={profilePic} size={"md"} />
-            </aside>
+          {loggedInUser && (
+            <article className="flex px-4 py-3 cursor-pointer transparent-brand w-max rounded-full mt-12">
+              <aside className="min-w-max">
+                <Avatar img={loggedInUser.profilePic} size={"md"} />
+              </aside>
 
-            <div className="w-full ml-3">
-              <div className="text-md w-full flex items-start justify-between">
-                <div>
-                  <h2 className="font-bold mr-1">{`${firstname} ${lastname}`}</h2>
-                  <p className="text-text-gray mr-1">{`@${username}`}</p>
+              <div className="w-full ml-3">
+                <div className="text-md w-full flex items-start justify-between">
+                  <div>
+                    <h2 className="font-bold mr-1">{`${loggedInUser.firstname} ${loggedInUser.lastname}`}</h2>
+                    <p className="text-text-gray mr-1">{`@${loggedInUser.username}`}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
+            </article>
+          )}
         </Link>
       </nav>
     </aside>
