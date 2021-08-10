@@ -45,7 +45,7 @@ module.exports = {
         300: "300px",
       },
       gridTemplateColumns: {
-        252: "2fr 5fr 3fr",
+        252: "2.5fr 5fr 2.5fr",
       },
     },
   },
