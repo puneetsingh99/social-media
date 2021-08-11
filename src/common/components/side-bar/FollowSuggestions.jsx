@@ -14,7 +14,7 @@ export const FollowSuggestions = () => {
     renderFollowSuggestions = followSuggestions.map((user) => {
       console.log(user);
       return (
-        <div key={user._id} className="border-b border-outline">
+        <div key={user._id} className="border-b border-outline  bg-dark-3">
           <UserExcerpt user={user} />
         </div>
       );

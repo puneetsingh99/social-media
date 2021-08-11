@@ -35,7 +35,7 @@ export const SearchBar = () => {
           <RiSearch2Line size={20} />
         </p>
         {keyword !== "" && (
-          <section className="min-h-100 max-h-300 rounded-2xl py-2 shadow-md border border-outline overflow-scroll">
+          <section className="absolute min-h-100 max-h-300 rounded-2xl py-2 shadow-md border border-outline overflow-scroll w-11/12 bg-dark-3">
             {renderUsers}
           </section>
         )}
