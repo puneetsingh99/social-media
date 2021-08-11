@@ -70,7 +70,7 @@ export const PostDetail = () => {
               </div>
             </div>
             {loggedInUsersPost && (
-              <div className="flex gap-4">
+              <div className="flex gap-2 md:gap-4">
                 <div
                   className="p-2 rounded-full transparent-pink flex-c text-text-gray hover:text-red-500   transition duration-200"
                   title="Remove this comment"
