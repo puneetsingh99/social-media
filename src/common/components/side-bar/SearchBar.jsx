@@ -8,8 +8,6 @@ export const SearchBar = () => {
 
   let renderUsers;
 
-  console.log(searchResult);
-
   if (keyword !== "") {
     if (searchResult.length === 0) {
       renderUsers = (
@@ -21,7 +19,6 @@ export const SearchBar = () => {
     renderUsers = searchResult.map((user) => (
       <UserExcerpt key={user._id} user={user} />
     ));
-    console.log(renderUsers);
   }
 
   return (

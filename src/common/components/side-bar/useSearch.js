@@ -12,6 +12,5 @@ export const useSearch = () => {
     }
   });
 
-  console.log(searchResult);
   return { keyword, setKeyword, searchResult };
 };
