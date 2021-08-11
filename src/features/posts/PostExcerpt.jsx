@@ -31,11 +31,7 @@ export const PostExcerpt = ({ post }) => {
         className="flex px-2 py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
       >
         <aside className="min-w-max px-3">
-          <Link
-            onClick={(e) => e.stopPropagation()}
-            to={`/user/${_id}`}
-            className="text-link"
-          >
+          <Link to={`/user/${_id}`} className="text-link">
             <Avatar img={profilePic} hover />
           </Link>
         </aside>
