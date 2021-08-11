@@ -31,7 +31,7 @@ export const ReactionButtons = ({
     dispatch(likePost(params));
   };
   return (
-    <article className="flex justify-between items-center w-4/6 text-text-gray">
+    <article className="flex justify-between items-center w-9/12 md:w-4/6 text-text-gray">
       <div
         onClick={(e) => {
           e.stopPropagation();

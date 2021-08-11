@@ -28,7 +28,7 @@ export const NavDesktop = () => {
   const profileRoute = `/user/${userId}`;
 
   return (
-    <aside className="hidden sm:block sticky top-0">
+    <aside className="hidden md:block sticky top-0">
       <div className="p-2">
         <Link to={home}>
           <div

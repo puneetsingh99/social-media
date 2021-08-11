@@ -26,7 +26,7 @@ export const CopyLink = ({ linkCopied, setLinkCopied, postId }) => {
         setLinkCopied(true);
         copyLink();
       }}
-      className={`bg-dark-3 rounded-full flex-c w-200 gap-2`}
+      className={`bg-dark-3 rounded-full flex-c w-max md:w-200 gap-2`}
     >
       <input
         type="text"

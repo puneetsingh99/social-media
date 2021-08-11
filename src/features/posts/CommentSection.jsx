@@ -27,8 +27,8 @@ export const CommentSection = ({ comments, post }) => {
   const loading = addCommentStatus === "loading";
 
   return (
-    <section className="p-4 border-b border-outline">
-      <div className="flex-c gap-4 pl-4">
+    <section className="py-4 px-2 md:p-4 border-b border-outline">
+      <div className="flex-c gap-2 md:gap-4 md:pl-4">
         <textarea
           maxLength={150}
           type="text"

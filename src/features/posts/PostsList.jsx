@@ -28,9 +28,10 @@ export const PostsList = () => {
   }
 
   return (
-    <main className="max-w-1250 m-auto grid grid-cols-252">
+    <main className="w-full m-auto md:max-w-1250 md:grid md:grid-cols-252">
       <NavDesktop />
-      <section className="border border-outline border-t-0  border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
+
+      <section className="md:border md:border-outline md:border-t-0  md:border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
         <div className="bg-dark-3 border-b border-outline sticky top-0 z-10">
           <PageHeader heading={"Home"} />
         </div>

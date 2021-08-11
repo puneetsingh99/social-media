@@ -23,7 +23,7 @@ export const UserDetails = ({ user }) => {
         >
           <Avatar img={user.profilePic} size={`2xl`} />
         </div>
-        <div className="flex justify-end items-center h-full pr-6 py-3">
+        <div className="flex justify-end items-center h-full pr-3 md:pr-6 py-3">
           <button
             onClick={followButtonClicked}
             className={followButtonStyle.css}
@@ -35,7 +35,7 @@ export const UserDetails = ({ user }) => {
           )}
         </div>
       </div>
-      <div className="px-4">
+      <div className="px-3 md:px-4">
         <h2 className="text-xl font-extrabold line-height">{`${user.firstname} ${user.lastname}`}</h2>
         <p className="text-text-gray text-md line-height">{`@${user.username}`}</p>
 

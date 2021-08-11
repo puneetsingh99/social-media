@@ -13,7 +13,7 @@ import { EditPost } from "./components/EditPost";
 
 export const PostDetail = () => {
   const { userId, token } = useSelector((state) => state.auth.auth);
-  const { post, updatePostStatus } = useSelector((state) => state.posts);
+  const { post } = useSelector((state) => state.posts);
   const navigate = useNavigate();
 
   const { author, content, image, video, createdAt, comments } = post;
@@ -48,7 +48,7 @@ export const PostDetail = () => {
         className="flex  py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
       >
         <aside className="min-w-max">
-          <div className=" w-full px-4">
+          <div className="w-full px-3 md:px-4">
             <Link to={`/user/${_id}`} className="text-link">
               <Avatar img={profilePic} hover />
             </Link>

@@ -34,8 +34,8 @@ export const EditProfile = ({ setShowEditProfile, user }) => {
   const loading = editProfileStatus === "loading";
 
   return (
-    <main className="m-auto z-30 fixed inset-0  bg-semi-transparent flex justify-center items-center">
-      <section className="w-550 bg-dark-3 overflow-hidden rounded-2xl h-5/6 m-auto">
+    <main className="px-1 m-auto z-30 fixed inset-0  bg-semi-transparent flex justify-center items-center">
+      <section className="w-full md:w-550 bg-dark-3 overflow-hidden rounded-2xl md:h-5/6 m-auto">
         <div className="p-2 border-b border-b-outline text-brand cursor-pointer flex justify-between">
           <div
             onClick={() => setShowEditProfile(false)}

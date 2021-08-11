@@ -30,7 +30,7 @@ export const PostExcerpt = ({ post }) => {
           setShowLinkCopy(false);
         }}
         key={post._id}
-        className="flex px-2 py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
+        className="flex md:px-2 py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
       >
         <div>
           <aside
@@ -40,7 +40,7 @@ export const PostExcerpt = ({ post }) => {
                 navigate(`/user/${_id}`);
               }
             }}
-            className="min-w-max px-3"
+            className="min-w-max px-2 md:px-3"
           >
             <Avatar img={profilePic} hover />
           </aside>
@@ -64,7 +64,7 @@ export const PostExcerpt = ({ post }) => {
               </div>
             </div>
           </div>
-          <div className="pr-4">
+          <div className="pr-2 md:pr-4">
             <div>
               <p className="font-normal mb-4">{content}</p>
 

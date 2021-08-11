@@ -31,8 +31,8 @@ export const AddPostForm = () => {
   const loading = addPostStatus === "loading";
 
   return (
-    <article className="flex px-2 py-3 pb-1 border-b border-outline">
-      <aside className="min-w-max px-3">
+    <article className="flex md:px-2 py-3 pb-1 border-b border-outline">
+      <aside className="min-w-max px-2 md:px-3">
         <Link to={`/user/${userId}`} className="text-link">
           <Avatar img={loggedInUser ? loggedInUser.profilePic : ""} hover />
         </Link>

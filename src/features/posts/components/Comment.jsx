@@ -13,8 +13,8 @@ export const Comment = ({ comment, onRemoveButtonClicked }) => {
   const loggedInUsersComment = userId === _id;
 
   return (
-    <article className="flex px-2 py-4 pb-1 cursor-pointer">
-      <aside className="min-w-max px-3">
+    <article className="flex px-1 md:px-2 py-4 pb-1 cursor-pointer">
+      <aside className="min-w-max md:px-3">
         <Link to={`/user/${_id}`} className="text-link">
           <Avatar size="sm" img={profilePic} hover />
         </Link>

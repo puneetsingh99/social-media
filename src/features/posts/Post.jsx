@@ -34,15 +34,15 @@ export const Post = () => {
   }
 
   return (
-    <main className="max-w-1250 m-auto grid grid-cols-252">
+    <main className="w-full m-auto md:max-w-1250 md:grid md:grid-cols-252">
       <NavDesktop />
-      <section className="border border-outline border-t-0  border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
+      <section className="md:border md:border-outline md:border-t-0  md:border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
         <div className="flex items-center border-b border-outline px-3  sticky z-30 top-0 bg-dark-3">
           <div
             onClick={() => {
               navigate(-1);
             }}
-            className="p-1 rounded-full transparent-blue cursor-pointer text-brand mr-3"
+            className="p-2 md:p-1 rounded-full transparent-blue cursor-pointer text-brand md:mr-3"
           >
             <IoIosArrowRoundBack size={30} />
           </div>
