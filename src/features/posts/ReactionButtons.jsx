@@ -4,13 +4,20 @@ import { GoComment } from "react-icons/go";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FiShare } from "react-icons/fi";
 import { likePost } from "./postsSlice";
+import { CopyLink } from "../../common/components/CopyLink";
 
-export const ReactionButtons = ({ post, setShowComments }) => {
+export const ReactionButtons = ({
+  post,
+  setShowComments,
+  showLinkCopy,
+  setShowLinkCopy,
+}) => {
   const { userId, token } = useSelector((state) => state.auth.auth);
   const { likes, comments, _id } = post;
   const commonClasses = `flex-c cursor-pointer rounded-full p-2`;
   const alreadyLiked = likes.find((like) => like.likedBy._id === userId);
   const [postLiked, setPostLiked] = useState(() => alreadyLiked);
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -57,11 +64,19 @@ export const ReactionButtons = ({ post, setShowComments }) => {
       </div>
 
       <div
-        onClick={(e) => e.stopPropagation()}
-        className={` ${commonClasses} p-4 hover:text-brand transparent-blue`}
+        onClick={(e) => {
+          e.stopPropagation();
+          setShowLinkCopy((currState) => !currState);
+        }}
+        className={` ${commonClasses} p-4 hover:text-brand transparent-blue relative`}
         title="Share"
       >
         <FiShare size={18} />
+        {showLinkCopy && (
+          <article className="absolute bottom-10 shadow-md bg-dark-3 rounded-full p-2">
+            <CopyLink linkCopied={linkCopied} setLinkCopied={setLinkCopied} />
+          </article>
+        )}
       </div>
     </article>
   );

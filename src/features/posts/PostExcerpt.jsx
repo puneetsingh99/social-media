@@ -10,12 +10,23 @@ export const PostExcerpt = ({ post }) => {
   const { author, content, image, video, createdAt, comments } = post;
   const { _id, firstname, lastname, username, profilePic } = author;
   const [showComments, setShowComments] = useState(false);
+  const [showLinkCopy, setShowLinkCopy] = useState(false);
   const navigate = useNavigate();
+
+  const reactionButtonsParams = {
+    showLinkCopy,
+    setShowLinkCopy,
+    post,
+    setShowComments,
+  };
 
   return (
     <>
       <article
-        onClick={() => navigate(`/post/${post._id}`)}
+        onClick={() => {
+          navigate(`/post/${post._id}`);
+          setShowLinkCopy(false);
+        }}
         key={post._id}
         className="flex px-2 py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
       >
@@ -71,8 +82,14 @@ export const PostExcerpt = ({ post }) => {
                 </div>
               )}
             </div>
-            <div className="w-full mt-2">
-              <ReactionButtons post={post} setShowComments={setShowComments} />
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowLinkCopy(false);
+              }}
+              className="w-full mt-2"
+            >
+              <ReactionButtons {...reactionButtonsParams} />
             </div>
           </div>
         </div>
