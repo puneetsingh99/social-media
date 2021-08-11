@@ -6,8 +6,6 @@ export const TimeAgo = ({ timestamp }) => {
   if (timestamp) {
     const date = parseISO(timestamp);
     const timePeriod = formatDistanceToNowStrict(date);
-    let formattedTime = timePeriod.split(" ");
-    console.log(formattedTime);
     timeAgo = `${timePeriod} ago`;
   }
   return (

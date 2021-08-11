@@ -39,8 +39,8 @@ export const UserExcerpt = ({ user }) => {
   return (
     <>
       <Link to={`/user/${_id}`} className="text-link">
-        <article className="flex px-2 py-3 cursor-pointer hover:bg-dark-3-hover bg-dark-3">
-          <aside className="min-w-max px-3">
+        <article className="flex pr-2 md:px-2 py-3 cursor-pointer hover:bg-dark-3-hover bg-dark-3">
+          <aside className="min-w-max px-2 md:px-3">
             <Avatar img={profilePic} />
           </aside>
 

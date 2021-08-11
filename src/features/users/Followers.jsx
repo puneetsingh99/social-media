@@ -50,15 +50,15 @@ export const Followers = () => {
     }
   }
   return (
-    <main className="max-w-1250 m-auto grid grid-cols-252">
+    <main className="w-full m-auto md:max-w-1250 md:grid md:grid-cols-252">
       <NavDesktop />
-      <section className="border border-outline border-t-0  border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
+      <section className="md:border md:border-outline md:border-t-0 md:border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
         {userState.user ? (
           <div>
-            <div className="flex items-center px-3  sticky z-30 top-0 bg-dark-3">
+            <div className="flex items-center px-3 sticky z-30 top-0 bg-dark-3">
               <div
                 onClick={() => navigate(-1)}
-                className="p-1 rounded-full transparent-blue cursor-pointer text-brand mr-6"
+                className="p-1 py-2 rounded-full transparent-blue cursor-pointer text-brand mr-3 md:mr-6"
               >
                 <IoIosArrowRoundBack size={30} />
               </div>
