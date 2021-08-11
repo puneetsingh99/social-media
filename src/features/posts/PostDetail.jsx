@@ -61,7 +61,7 @@ export const PostDetail = () => {
               <Link to={`/user/${_id}`} className="text-link">
                 <h2
                   onClick={(e) => e.stopPropagation()}
-                  className="font-bold mr-1 hover:underline"
+                  className="font-bold md:mr-1 hover:underline"
                 >{`${firstname} ${lastname}`}</h2>
               </Link>
               <p className="text-text-gray mr-1">{`@${username}`}</p>

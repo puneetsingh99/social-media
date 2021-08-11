@@ -4,7 +4,7 @@ import { FollowSuggestions } from "./FollowSuggestions";
 
 export const SideBar = () => {
   return (
-    <aside className="hidden sm:block sticky top-0">
+    <aside className="hidden sm:block sticky top-0 ml-6">
       <article>
         <div className="relative z-50 bg-dark-3 w-full">
           <SearchBar />
