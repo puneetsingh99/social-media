@@ -8,7 +8,11 @@ export const FollowSuggestions = () => {
   let renderFollowSuggestions;
 
   if (followSuggestions.length === 0) {
-    renderFollowSuggestions = "No suggestions.";
+    renderFollowSuggestions = (
+      <div className="flex-c text-text-gray">
+        <p>No suggestions</p>
+      </div>
+    );
   }
   if (followSuggestions.length > 0) {
     renderFollowSuggestions = followSuggestions.map((user) => {
