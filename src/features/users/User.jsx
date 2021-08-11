@@ -17,7 +17,7 @@ import { UserDetails } from "./UserDetails";
 
 export const User = () => {
   const { userId } = useParams();
-  const { auth } = useSelector((state) => state.auth);
+  const { auth, loggedInUser } = useSelector((state) => state.auth);
 
   const { token } = auth;
   const userState = useSelector((state) => state.users);
@@ -31,7 +31,7 @@ export const User = () => {
   useEffect(() => {
     dispatch(fetchPostsByUser({ userId, token }));
     dispatch(fetchUser({ userId, token }));
-  }, [userId, auth.userId]);
+  }, [userId, auth.userId, loggedInUser]);
 
   let renderPosts;
 
