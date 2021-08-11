@@ -61,8 +61,10 @@ html {
 thin scrollbar
 */
 
-.out-out-view {
-  top: 10000px;
+.out-of-view {
+  position: fixed;
+  z-index: -20;
+  left: 10000px;
 }
 
 ::-webkit-scrollbar {

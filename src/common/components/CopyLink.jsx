@@ -10,7 +10,7 @@ export const CopyLink = ({ linkCopied, setLinkCopied, postId }) => {
     if (linkCopied) {
       setTimeout(() => {
         setLinkCopied(false);
-      }, 4000);
+      }, 5000);
     }
   }, [linkCopied]);
 
@@ -32,7 +32,7 @@ export const CopyLink = ({ linkCopied, setLinkCopied, postId }) => {
       <input
         type="text"
         ref={linkRef}
-        className="fixed out-of-view w-1 border-none bg-dark-3 outline-none focus:outline-none"
+        className="absolute out-of-view w-1 border-none bg-dark-3 outline-none focus:outline-none"
       />
       <HiLink />
       <p>{linkCopied ? "Link copied" : "Click to copy link"}</p>
