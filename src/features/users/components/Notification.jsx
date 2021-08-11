@@ -8,7 +8,7 @@ export const Notification = ({ from, type, postId, createdAt }) => {
   return (
     <article
       onClick={() => {
-        navigate(`/post/${postId}`);
+        postId ? navigate(`/post/${postId}`) : navigate(`/user/${_id}`);
       }}
       className="flex px-2 py-3 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
     >

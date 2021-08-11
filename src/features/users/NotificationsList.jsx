@@ -25,7 +25,12 @@ export const Notifications = () => {
   let renderNotifications;
 
   if (userState.user) {
-    const notifications = userState.user.notifications.filter((n) => n.post);
+    const notifications = userState.user.notifications.filter((n) => {
+      if (n.type === "follow") {
+        return n.from;
+      }
+      return n.post;
+    });
     const filteredNotifications = notifications.filter(
       (n) => n.from._id !== userId
     );
@@ -34,7 +39,7 @@ export const Notifications = () => {
       .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
     renderNotifications = orderedNotifications.map((n) => {
       const { from, type, post, createdAt } = n;
-      const props = { from, type, postId: post._id, createdAt };
+      const props = { from, type, postId: post?._id, createdAt };
       return <Notification key={n._id} {...props} />;
     });
   }
