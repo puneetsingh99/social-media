@@ -36,12 +36,16 @@ export const Followers = () => {
   if (userState.user) {
     if (showFollowers) {
       renderUsers = userState.user.followers.map((user) => (
-        <UserExcerpt key={user._id} user={user} />
+        <div key={user._id} className="border-b border-outline">
+          <UserExcerpt user={user} />
+        </div>
       ));
     }
     if (!showFollowers) {
       renderUsers = userState.user.following.map((user) => (
-        <UserExcerpt key={user._id} user={user} />
+        <div key={user._id} className="border-b border-outline">
+          <UserExcerpt user={user} />
+        </div>
       ));
     }
   }

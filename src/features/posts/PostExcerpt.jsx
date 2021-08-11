@@ -58,7 +58,10 @@ export const PostExcerpt = ({ post }) => {
                 </div>
               )}
               {video && (
-                <div className="border border-outline rounded-2xl overflow-hidden">
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="border border-outline rounded-2xl overflow-hidden"
+                >
                   <ReactPlayer
                     url={video}
                     controls

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../../features/auth/authSlice";
 import { RiHome7Line } from "react-icons/ri";
@@ -10,13 +10,18 @@ import { Link, useLocation } from "react-router-dom";
 import { appRoutes } from "./appRoutes";
 import { notificationStyle } from "./utils";
 import { Avatar } from "..";
+import { fetchLoggedInUser } from "../../../features/auth/authSlice";
 
 export const NavDesktop = () => {
   const { pathname } = useLocation();
   const { auth, loggedInUser } = useSelector((state) => state.auth);
-  const { userId } = auth;
+  const { userId, token } = auth;
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchLoggedInUser({ userId, token }));
+  }, [userId]);
 
   const { home, notifications } = appRoutes;
 

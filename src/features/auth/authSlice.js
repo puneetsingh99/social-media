@@ -82,10 +82,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      window.localStorage.setItem(
-        "socialMediaLogin",
-        JSON.stringify(authReset)
-      );
+      window.localStorage.removeItem("socialMediaLogin");
       state.status = "idle";
       state.auth = authReset;
       state.error = null;

@@ -23,6 +23,7 @@ export const Notification = ({ from, type, postId, createdAt }) => {
           </div>
           {type === "like" && <p className="text-lg">{`liked your post`}</p>}
           {type === "comment" && <p>{`commented on your post`}</p>}
+          {type === "follow" && <p>{`started following you`}</p>}
         </div>
       </article>
     </Link>

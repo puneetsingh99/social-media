@@ -1,5 +1,12 @@
 import React from "react";
+import { SearchBar } from "./SearchBar";
 
 export const SideBar = () => {
-  return <div className="sticky top-0"></div>;
+  return (
+    <aside className="sticky top-0">
+      <article>
+        <SearchBar />
+      </article>
+    </aside>
+  );
 };

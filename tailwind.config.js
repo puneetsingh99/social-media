@@ -32,6 +32,9 @@ module.exports = {
         700: "700px",
       },
       height: {
+        "100%": "100%",
+        50: "50px",
+        100: "100px",
         200: "200px",
         250: "250px",
         300: "300px",
@@ -41,7 +44,15 @@ module.exports = {
         1250: "1275px",
       },
       maxHeight: {
+        200: "200px",
+        250: "250px",
         275: "275px",
+        300: "300px",
+      },
+      minHeight: {
+        100: "100px",
+        200: "200px",
+        250: "250px",
         300: "300px",
       },
       gridTemplateColumns: {
