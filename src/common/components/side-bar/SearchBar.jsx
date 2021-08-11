@@ -25,13 +25,13 @@ export const SearchBar = () => {
     <>
       <div className="sticky top-0 bg-dark-3 px-4 pl-6 pt-2">
         <input
-          className={`relative w-full bg-dark-2 py-3 px-4 pl-12 mb-2 rounded-full border-2 border-dark-2 focus:border-transparent focus:outline-none focus:ring-2 ring-brand ring-opacity-60`}
+          className={`relative w-full bg-dark-2 py-2 px-4 pl-12 mb-2 rounded-full border-2 border-dark-2 focus:border-transparent focus:outline-none focus:ring-2 ring-brand ring-opacity-60`}
           value={keyword}
           type="text"
           placeholder={"Search people"}
           onChange={(e) => setKeyword(e.target.value)}
         />
-        <p className="text-text-gray absolute top-6 left-10">
+        <p className="text-text-gray absolute top-5 left-10">
           <RiSearch2Line size={20} />
         </p>
         {keyword !== "" && (
