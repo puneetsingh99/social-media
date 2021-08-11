@@ -4,7 +4,6 @@ import { UserExcerpt } from "../../../features/users/UserExcerpt";
 
 export const FollowSuggestions = () => {
   const { followSuggestions } = useSearch();
-  console.log(followSuggestions);
   let renderFollowSuggestions;
 
   if (followSuggestions.length === 0) {
