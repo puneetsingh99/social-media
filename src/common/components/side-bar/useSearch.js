@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchAllUsers } from "../../../features/users/usersSlice";
 import { search } from "./search";
 
 export const useSearch = () => {
   const { allUsers } = useSelector((state) => state.users);
-  const { userId } = useSelector((state) => state.auth.auth);
+  const { auth, loggedInUser } = useSelector((state) => state.auth);
+  const { userId } = auth;
   const [keyword, setKeyword] = useState("");
 
   const searchResult = allUsers.filter((user) => {
@@ -12,6 +14,12 @@ export const useSearch = () => {
       return search(keyword, user);
     }
   });
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllUsers());
+  }, [userId, loggedInUser]);
 
   const followSuggestions = allUsers.filter((user) => {
     const { followers } = user;
