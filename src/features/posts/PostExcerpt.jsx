@@ -23,18 +23,23 @@ export const PostExcerpt = ({ post }) => {
   return (
     <>
       <article
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           navigate(`/post/${post._id}`);
           setShowLinkCopy(false);
         }}
         key={post._id}
         className="flex px-2 py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
       >
-        <aside className="min-w-max px-3">
-          <Link to={`/user/${_id}`} className="text-link">
+        <Link
+          onClick={(e) => e.stopPropagation()}
+          to={`/user/${_id}`}
+          className="text-link"
+        >
+          <aside className="min-w-max px-3">
             <Avatar img={profilePic} hover />
-          </Link>
-        </aside>
+          </aside>
+        </Link>
 
         <div className="w-full">
           <div className="text-md flex items-center justify-between">
