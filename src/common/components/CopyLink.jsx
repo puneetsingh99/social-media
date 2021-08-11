@@ -3,7 +3,7 @@ import { HiLink } from "react-icons/hi";
 import { BsCheckCircle } from "react-icons/bs";
 
 export const CopyLink = ({ linkCopied, setLinkCopied, postId }) => {
-  const postLink = `http://localhost:3000/post/${postId}`;
+  const postLink = `https://growsocialmedia.netlify.app/post/${postId}`;
   const linkRef = useRef(null);
 
   useEffect(() => {
@@ -18,7 +18,6 @@ export const CopyLink = ({ linkCopied, setLinkCopied, postId }) => {
     linkRef.current.value = postLink;
     linkRef.current.select();
     document.execCommand("copy");
-    console.log("link copied");
   };
   return (
     <div
