@@ -61,6 +61,10 @@ html {
 thin scrollbar
 */
 
+.out-out-view {
+  top: 10000px;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   border-radius: 100%;

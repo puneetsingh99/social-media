@@ -1,18 +1,41 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { HiLink } from "react-icons/hi";
 import { BsCheckCircle } from "react-icons/bs";
 
-export const CopyLink = ({ linkCopied, setLinkCopied }) => {
+export const CopyLink = ({ linkCopied, setLinkCopied, postId }) => {
+  const postLink = `http://localhost:3000/post/${postId}`;
+  const linkRef = useRef(null);
+
+  useEffect(() => {
+    if (linkCopied) {
+      setTimeout(() => {
+        setLinkCopied(false);
+      }, 4000);
+    }
+  }, [linkCopied]);
+
+  const copyLink = () => {
+    linkRef.current.value = postLink;
+    linkRef.current.select();
+    document.execCommand("copy");
+    console.log("link copied");
+  };
   return (
     <div
       onClick={(e) => {
         e.stopPropagation();
         setLinkCopied(true);
+        copyLink();
       }}
       className={`bg-dark-3 rounded-full flex-c w-200 gap-2`}
     >
+      <input
+        type="text"
+        ref={linkRef}
+        className="fixed out-of-view w-1 border-none bg-dark-3 outline-none focus:outline-none"
+      />
       <HiLink />
-      <p>{linkCopied ? "Copied" : "Click to copy"}</p>
+      <p>{linkCopied ? "Link copied" : "Click to copy link"}</p>
       {linkCopied && (
         <div className="text-green-500 flex-c">
           <BsCheckCircle />

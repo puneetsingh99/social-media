@@ -30,7 +30,6 @@ export const ReactionButtons = ({
     };
     dispatch(likePost(params));
   };
-
   return (
     <article className="flex justify-between items-center w-4/6 text-text-gray">
       <div
@@ -74,7 +73,11 @@ export const ReactionButtons = ({
         <FiShare size={18} />
         {showLinkCopy && (
           <article className="absolute bottom-10 shadow-md bg-dark-3 rounded-full p-2">
-            <CopyLink linkCopied={linkCopied} setLinkCopied={setLinkCopied} />
+            <CopyLink
+              linkCopied={linkCopied}
+              setLinkCopied={setLinkCopied}
+              postId={post._id}
+            />
           </article>
         )}
       </div>

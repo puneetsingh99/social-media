@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUser } from "./usersSlice";
 import { fetchPostsByUser } from "../posts/postsSlice";
@@ -18,11 +18,10 @@ import { UserDetails } from "./UserDetails";
 export const User = () => {
   const { userId } = useParams();
   const { auth } = useSelector((state) => state.auth);
-  const location = useLocation();
-  console.log(location);
 
   const { token } = auth;
   const userState = useSelector((state) => state.users);
+
   const postState = useSelector((state) => state.posts);
 
   const { postsByUser, postsByUserStatus } = postState;

@@ -44,7 +44,11 @@ export const PostExcerpt = ({ post }) => {
         <div className="w-full">
           <div className="text-md flex items-center justify-between">
             <div className="flex items-center">
-              <Link to={`/user/${_id}`} className="text-link">
+              <Link
+                onClick={(e) => e.stopPropagation()}
+                to={`/user/${_id}`}
+                className="text-link"
+              >
                 <h2
                   onClick={(e) => e.stopPropagation()}
                   className="font-bold mr-1 hover:underline"
