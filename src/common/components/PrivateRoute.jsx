@@ -1,13 +1,16 @@
 import React from "react";
 import { Route, Navigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { checkTokenExpiry } from "../utils/checkTokenExpiry";
+import { logout } from "../../features/auth/authSlice";
 
 export const PrivateRoute = ({ path, element, ...props }) => {
   const location = useLocation();
-  const auth = useSelector((state) => state.auth);
-  const { isUserLoggedIn } = auth.auth;
+  const { auth } = useSelector((state) => state.auth);
+  const { isUserLoggedIn } = auth;
   let loginUser = !isUserLoggedIn;
+
+  const dispatch = useDispatch();
 
   if (isUserLoggedIn) {
     const loginObject = localStorage.getItem("socialMediaLogin");
@@ -19,11 +22,7 @@ export const PrivateRoute = ({ path, element, ...props }) => {
 
       if (isTokenExpired) {
         loginUser = true;
-        //TODO:remove this line after testing
-        localStorage.setItem(
-          "socialMediaLogin",
-          JSON.stringify({ userId: "", isUserLoggedIn: false, token: "" })
-        );
+        dispatch(logout());
       }
     } else {
       console.log("Login object not found in the localStorage");
