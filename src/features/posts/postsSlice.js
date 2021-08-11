@@ -94,7 +94,7 @@ export const likePost = createAsyncThunk(
     axios.defaults.headers.common["Authorization"] = token;
     try {
       const response = await axios.post(likePostAPI(postId), { likedBy });
-      return response.data;
+      return response.data.updatedPost;
     } catch (error) {
       console.log(error);
       return thunkAPI.rejectWithValue(error.response.data);
@@ -300,6 +300,29 @@ export const postsSlice = createSlice({
       state.error = action.payload.message;
     },
     [deleteComment.fulfilled]: (state, action) => {
+      const postId = action.payload._id;
+      const allPostsPostIndex = state.posts.findIndex(
+        (post) => post._id === postId
+      );
+      const postsByUserIndex = state.postsByUser.findIndex(
+        (post) => post._id === postId
+      );
+
+      if (state.post) {
+        if (state.post._id === postId) {
+          state.post = action.payload;
+        }
+      }
+
+      if (allPostsPostIndex !== -1) {
+        state.posts[allPostsPostIndex] = action.payload;
+      }
+
+      if (postsByUserIndex !== -1) {
+        state.postsByUser[postsByUserIndex] = action.payload;
+      }
+    },
+    [likePost.fulfilled]: (state, action) => {
       const postId = action.payload._id;
       const allPostsPostIndex = state.posts.findIndex(
         (post) => post._id === postId

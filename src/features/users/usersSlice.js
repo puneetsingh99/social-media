@@ -44,6 +44,7 @@ export const updateFollowers = createAsyncThunk(
       const response = await axios.post(updateFollowersAPI(userId), {
         loggedInUserId,
       });
+      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error);
