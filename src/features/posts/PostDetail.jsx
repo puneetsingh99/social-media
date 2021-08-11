@@ -21,6 +21,7 @@ export const PostDetail = () => {
 
   const [showComments, setShowComments] = useState(false);
   const [showEditor, setShowEditor] = useState(false);
+  const [showLinkCopy, setShowLinkCopy] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -30,18 +31,28 @@ export const PostDetail = () => {
 
   const loggedInUsersPost = userId === _id;
   const editorParams = { content, postId: post._id, setShowEditor };
+  const reactionButtonsParams = {
+    showLinkCopy,
+    setShowLinkCopy,
+    post,
+    setShowComments,
+  };
 
   return (
     <>
       <article
-        onClick={() => navigate(`/post/${post._id}`)}
+        onClick={() => {
+          setShowLinkCopy(false);
+        }}
         key={post._id}
-        className="flex px-2 py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
+        className="flex  py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
       >
-        <aside onClick={(e) => e.stopPropagation()} className="min-w-max px-3">
-          <Link to={`/user/${_id}`} className="text-link">
-            <Avatar img={profilePic} hover />
-          </Link>
+        <aside className="min-w-max">
+          <div className=" w-full px-4">
+            <Link to={`/user/${_id}`} className="text-link">
+              <Avatar img={profilePic} hover />
+            </Link>
+          </div>
         </aside>
 
         <div className="w-full">
@@ -111,7 +122,7 @@ export const PostDetail = () => {
               )}
             </div>
             <div className="w-full mt-2">
-              <ReactionButtons post={post} setShowComments={setShowComments} />
+              <ReactionButtons {...reactionButtonsParams} />
             </div>
           </div>
         </div>
