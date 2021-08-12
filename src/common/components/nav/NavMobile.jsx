@@ -25,7 +25,7 @@ export const NavMobile = () => {
   const profileRoute = `/user/${userId}`;
 
   return (
-    <footer className="md:hidden sticky bottom-0 b px-4 py-2">
+    <footer className="md:hidden sticky bottom-0 b px-4 py-1">
       <nav className="flex justify-between items-center">
         <Link to={home}>
           <div

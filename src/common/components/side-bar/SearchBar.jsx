@@ -31,7 +31,7 @@ export const SearchBar = () => {
           placeholder={"Search people"}
           onChange={(e) => setKeyword(e.target.value)}
         />
-        <p className="text-text-gray absolute top-5 left-10">
+        <p className="text-text-gray absolute top-5 left-8 md:left-10">
           <RiSearch2Line size={20} />
         </p>
         {keyword !== "" && (

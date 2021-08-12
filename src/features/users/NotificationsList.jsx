@@ -48,7 +48,7 @@ export const Notifications = () => {
   return (
     <main className="w-full m-auto md:max-w-1250 md:grid md:grid-cols-252">
       <NavDesktop />
-      <section className="border border-outline border-t-0  border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
+      <section className="md:border border-outline border-t-0  border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
         {userState.user ? (
           <div>
             <div className="flex items-center px-3  sticky z-30 top-0 bg-dark-3 border-b border-outline">
