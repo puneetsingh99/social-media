@@ -7,7 +7,6 @@ import { onFollowButtonClicked, setFollowReqStatus } from "./usersSlice";
 
 export const UserExcerpt = ({ user }) => {
   const { followReqStatus } = useSelector((state) => state.users);
-  console.log({ followReqStatus });
   const { _id, username, firstname, lastname, bio, profilePic } = user;
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth.auth);

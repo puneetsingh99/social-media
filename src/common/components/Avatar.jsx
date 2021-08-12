@@ -5,6 +5,9 @@ export const Avatar = ({ img, size, hover }) => {
   let avatarDimensions;
 
   switch (size) {
+    case "xs":
+      avatarDimensions = "w-6 h-6";
+      break;
     case "sm":
       avatarDimensions = "w-8 h-8";
       break;

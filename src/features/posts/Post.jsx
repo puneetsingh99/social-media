@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Error, Loader, NavDesktop, PageHeader } from "../../common/components";
+import {
+  Error,
+  Loader,
+  NavDesktop,
+  NavMobile,
+  PageHeader,
+} from "../../common/components";
 import { fetchPost } from "./postsSlice";
 import { SideBar } from "../../common/components/side-bar/SideBar";
 import { useParams, useNavigate, Navigate } from "react-router-dom";
@@ -54,6 +60,9 @@ export const Post = () => {
         {fetchPostStatus === "succeeded" && renderPost}
 
         {fetchPostStatus === "failed" && <Error message={error} />}
+      </section>
+      <section className="md:hidden bg-dark-3 border-t border-outline sticky bottom-0 z-10">
+        <NavMobile />
       </section>
       <SideBar />
     </main>

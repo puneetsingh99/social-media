@@ -18,9 +18,13 @@ export const useSearch = () => {
 
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   dispatch(fetchAllUsers());
+  // }, [userId, loggedInUser, userState.user]);
+
   useEffect(() => {
     dispatch(fetchAllUsers());
-  }, [userId, loggedInUser, userState.user]);
+  }, [userId]);
 
   const followSuggestions = allUsers.filter((user) => {
     const { followers } = user;

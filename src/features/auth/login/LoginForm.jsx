@@ -48,7 +48,6 @@ export const LoginForm = () => {
     }
 
     if (isValid) {
-      console.log(auth);
       dispatch(loginWithCredentials(credentials));
       formDispatch({ type: "RST_FORM" });
     }
