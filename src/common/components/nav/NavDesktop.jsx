@@ -16,13 +16,9 @@ import { LogoSvg } from "../../../assets/LogoSvg";
 export const NavDesktop = () => {
   const { pathname } = useLocation();
   const { auth, loggedInUser } = useSelector((state) => state.auth);
-  const { userId, token } = auth;
+  const { userId } = auth;
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchLoggedInUser({ userId, token }));
-  }, [userId]);
 
   const { home, notifications } = appRoutes;
 

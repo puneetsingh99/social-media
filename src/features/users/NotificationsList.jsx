@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 
 import {
   NavDesktop,
@@ -10,19 +10,12 @@ import {
   EmptyFeed,
 } from "../../common/components";
 import { Notification } from "./components/Notification";
-import { fetchLoggedInUser } from "../auth/authSlice";
 
 export const NotificationsList = () => {
   const { auth, loggedInUser } = useSelector((state) => state.auth);
-  const { userId, token } = auth;
+  const { userId } = auth;
 
   const userState = useSelector((state) => state.users);
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchLoggedInUser({ userId, token }));
-  }, [userId]);
-
   let renderNotifications;
 
   if (loggedInUser) {

@@ -23,7 +23,6 @@ export const EditProfile = ({ setShowEditProfile, user }) => {
   const profilePicRef = useRef(null);
   const coverPicRef = useRef(null);
 
-  console.log(editProfileStatus);
   useEffect(() => {
     if (editProfileStatus === "succeeded") {
       dispatch(setEditProfileStatus("idle"));

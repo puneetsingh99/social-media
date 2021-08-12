@@ -18,7 +18,7 @@ import { UserDetails } from "./UserDetails";
 
 export const User = () => {
   const { userId } = useParams();
-  const { auth } = useSelector((state) => state.auth);
+  const { auth, editProfileStatus } = useSelector((state) => state.auth);
   const { token } = auth;
   const userState = useSelector((state) => state.users);
 
@@ -29,10 +29,15 @@ export const User = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchPostsByUser({ userId, token }));
     dispatch(fetchUser({ userId, token }));
-  }, [userId, auth.userId]);
+    dispatch(fetchPostsByUser({ userId, token }));
+  }, [userId]);
 
+  useEffect(() => {
+    if (editProfileStatus === "succeeded") {
+      dispatch(fetchUser({ userId, token }));
+    }
+  }, [editProfileStatus]);
   let renderPosts;
 
   if (postsByUserStatus === "succeeded") {
