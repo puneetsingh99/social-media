@@ -45,85 +45,81 @@ export const PostDetail = () => {
           setShowLinkCopy(false);
         }}
         key={post._id}
-        className="flex  py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
+        className="py-4 pb-1 border-b border-outline cursor-pointer hover:bg-dark-3-hover"
       >
-        <aside className="min-w-max">
-          <div className="w-full px-3 md:px-4">
+        <aside className="w-full flex">
+          <div className="w-max px-3 md:px-4">
             <Link to={`/user/${_id}`} className="text-link">
               <Avatar img={profilePic} hover />
             </Link>
           </div>
-        </aside>
-
-        <div className="w-full">
-          <div className="text-md flex items-center justify-between">
-            <div className="flex items-center">
-              <Link to={`/user/${_id}`} className="text-link">
-                <h2
-                  onClick={(e) => e.stopPropagation()}
-                  className="font-bold md:mr-1 hover:underline"
-                >{`${firstname} ${lastname}`}</h2>
-              </Link>
-              <p className="text-text-gray mr-1">{`@${username}`}</p>
-              <div className="text-text-gray">
-                <TimeAgo timestamp={createdAt} />
+          <div className="w-10/12">
+            <div className="text-md flex items-center justify-between">
+              <div className="flex items-center">
+                <section>
+                  <Link to={`/user/${_id}`} className="text-link">
+                    <h2
+                      onClick={(e) => e.stopPropagation()}
+                      className="font-bold mr-1 hover:underline"
+                    >{`${firstname} ${lastname}`}</h2>
+                  </Link>
+                  <p className="text-text-gray mr-1">{`@${username}`}</p>
+                </section>
               </div>
-            </div>
-            {loggedInUsersPost && (
-              <div className="flex gap-2 md:gap-4">
-                <div
-                  className="p-2 rounded-full transparent-pink flex-c text-text-gray hover:text-red-500   transition duration-200"
-                  title="Remove this comment"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onRemoveButtonClicked();
-                  }}
-                >
-                  <MdDelete size={22} />
+              {loggedInUsersPost && (
+                <div className="flex gap-2 md:gap-4">
+                  <div
+                    className="p-2 rounded-full transparent-pink flex-c text-text-gray hover:text-red-500   transition duration-200"
+                    title="Remove this comment"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onRemoveButtonClicked();
+                    }}
+                  >
+                    <MdDelete size={22} />
+                  </div>
+                  <p
+                    className="p-2 rounded-full transparent-brand flex-c text-text-gray hover:text-brand   transition duration-200"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowEditor((currState) => !currState);
+                    }}
+                  >
+                    <FiEdit2 size={20} />
+                  </p>
                 </div>
-                <p
-                  className="p-2 rounded-full transparent-brand flex-c text-text-gray hover:text-brand   transition duration-200"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowEditor((currState) => !currState);
-                  }}
-                >
-                  <FiEdit2 size={20} />
-                </p>
+              )}
+            </div>
+          </div>
+        </aside>
+        <div className="px-3 md:px-4 pt-2">
+          <div>
+            {showEditor ? (
+              <EditPost {...editorParams} />
+            ) : (
+              <p className="font-normal mb-4 text-xl">{content}</p>
+            )}
+
+            {image && (
+              <div className="border border-outline rounded-2xl max-h-275 overflow-hidden">
+                <img
+                  src={image}
+                  alt={`a post by ${username}`}
+                  className="rounded-2xl"
+                />
+              </div>
+            )}
+            {video && (
+              <div className="border border-outline rounded-2xl overflow-hidden">
+                <ReactPlayer url={video} controls width="100%" height="auto" />
               </div>
             )}
           </div>
-          <div className="pr-4">
-            <div>
-              {showEditor ? (
-                <EditPost {...editorParams} />
-              ) : (
-                <p className="font-normal mb-4 text-xl">{content}</p>
-              )}
-
-              {image && (
-                <div className="border border-outline rounded-2xl max-h-275 overflow-hidden">
-                  <img
-                    src={image}
-                    alt={`a post by ${username}`}
-                    className="rounded-2xl"
-                  />
-                </div>
-              )}
-              {video && (
-                <div className="border border-outline rounded-2xl overflow-hidden">
-                  <ReactPlayer
-                    url={video}
-                    controls
-                    width="100%"
-                    height="auto"
-                  />
-                </div>
-              )}
-            </div>
-            <div className="w-full mt-2">
-              <ReactionButtons {...reactionButtonsParams} />
-            </div>
+          <div className="text-text-gray py-2">
+            <TimeAgo timestamp={createdAt} full />
+          </div>
+          <div className="w-full">
+            <ReactionButtons {...reactionButtonsParams} />
           </div>
         </div>
       </article>
@@ -131,3 +127,6 @@ export const PostDetail = () => {
     </>
   );
 };
+
+{
+}

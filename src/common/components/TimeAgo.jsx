@@ -1,14 +1,25 @@
 import React from "react";
-import { parseISO, formatDistanceToNowStrict } from "date-fns";
+import {
+  parseISO,
+  formatDistanceToNowStrict,
+  formatDistanceToNow,
+} from "date-fns";
 import { formatTime } from "../utils/formatTime";
 
-export const TimeAgo = ({ timestamp }) => {
+export const TimeAgo = ({ timestamp, full }) => {
   let timeAgo = "";
   if (timestamp) {
     const date = parseISO(timestamp);
-    const timePeriod = formatDistanceToNowStrict(date);
 
-    timeAgo = formatTime(timePeriod);
+    if (!full) {
+      const timePeriod = formatDistanceToNowStrict(date);
+      timeAgo = formatTime(timePeriod);
+    }
+
+    if (full) {
+      console.log(date);
+      timeAgo = `${formatDistanceToNow(date)} ago`;
+    }
   }
   return (
     <span title={timestamp} className="text-sm">
