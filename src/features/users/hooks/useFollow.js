@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { onFollowButtonClicked, updateFollowers } from "../usersSlice";
+import { onFollowButtonClicked } from "../usersSlice";
 import { followButtonState } from "../utils/followButtonStates";
 
 export const useFollow = ({ user }) => {

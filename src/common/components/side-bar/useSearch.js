@@ -4,9 +4,9 @@ import { fetchAllUsers } from "../../../features/users/usersSlice";
 import { search } from "./search";
 
 export const useSearch = () => {
-  const userState = useSelector((state) => state.users);
   const { allUsers } = useSelector((state) => state.users);
   const { auth, loggedInUser } = useSelector((state) => state.auth);
+  const { followers, following } = loggedInUser;
   const { userId } = auth;
   const [keyword, setKeyword] = useState("");
 
@@ -18,13 +18,9 @@ export const useSearch = () => {
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchAllUsers());
-  // }, [userId, loggedInUser, userState.user]);
-
   useEffect(() => {
     dispatch(fetchAllUsers());
-  }, [userId]);
+  }, [userId, followers, following]);
 
   const followSuggestions = allUsers.filter((user) => {
     const { followers } = user;
