@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loginWithCredentials, selectAuth } from "../authSlice";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import { FaTwitter } from "react-icons/fa";
 import { useLogin } from "./useLogin";
+import { LogoSvg } from "../../../assets/LogoSvg";
 
 export const LoginForm = () => {
   const auth = useSelector(selectAuth);
@@ -59,10 +59,10 @@ export const LoginForm = () => {
     <section className="min-h-screen pb-8 flex items-start justify-center bg-dark-3">
       <article className="w-full sm:w-350 px-2">
         <div className="py-8 pt-4">
-          <FaTwitter size={40} />
+          <LogoSvg size={40} />
         </div>
         <h1 className="text-3xl font-extrabold mb-4 tracking-wider">
-          Log in to Twitter
+          Log in to Grow
         </h1>
         <div className="h-3 my-2 text-sm flex items-center text-red-500">
           {validationError && <p>{`• ${validationError}`}</p>}
@@ -105,7 +105,7 @@ export const LoginForm = () => {
           </button>
           <Link to={`/signup`} className="text-link">
             <p className="text-center text-brand hover:underline cursor-pointer">
-              Sign up for twitter
+              Sign up for Grow
             </p>
           </Link>
         </form>

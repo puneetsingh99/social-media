@@ -16,12 +16,14 @@ export const FollowSuggestions = () => {
   if (followSuggestions.length > 0) {
     renderFollowSuggestions = followSuggestions.map((user) => {
       return (
-        <div key={user._id} className="border-b border-outline  bg-dark-3">
+        <div
+          key={user._id}
+          className="max-h-200 border-b border-outline   bg-dark-3"
+        >
           <UserExcerpt user={user} />
         </div>
       );
     });
   }
-
   return <section>{renderFollowSuggestions}</section>;
 };

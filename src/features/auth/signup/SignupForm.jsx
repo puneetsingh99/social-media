@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signupUser, selectAuth } from "../authSlice";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import { FaTwitter } from "react-icons/fa";
 import { useSignup } from "./useSignup";
+import { LogoSvg } from "../../../assets/LogoSvg";
 
 export const SignupForm = () => {
   const auth = useSelector(selectAuth);
@@ -44,7 +44,7 @@ export const SignupForm = () => {
     <section className="min-h-screen pb-8 flex items-start justify-center bg-dark-3">
       <article className="w-full sm:w-450 px-2">
         <div className="py-4">
-          <FaTwitter size={30} />
+          <LogoSvg size={30} />
         </div>
         <h1 className="text-3xl font-extrabold  tracking-wider mb-2">
           Create an account

@@ -11,6 +11,7 @@ import { appRoutes } from "./appRoutes";
 import { notificationStyle } from "./utils";
 import { Avatar } from "..";
 import { fetchLoggedInUser } from "../../../features/auth/authSlice";
+import { LogoSvg } from "../../../assets/LogoSvg";
 
 export const NavDesktop = () => {
   const { pathname } = useLocation();
@@ -34,7 +35,7 @@ export const NavDesktop = () => {
           <div
             className={`p-2 w-max rounded-full transparent-brand hover:cursor-pointer`}
           >
-            <FaTwitter size={30} />
+            <LogoSvg size={30} />
           </div>
         </Link>
       </div>

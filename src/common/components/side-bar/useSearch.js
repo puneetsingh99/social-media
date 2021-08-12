@@ -6,7 +6,6 @@ import { search } from "./search";
 export const useSearch = () => {
   const { allUsers } = useSelector((state) => state.users);
   const { auth, loggedInUser } = useSelector((state) => state.auth);
-  const { followers, following } = loggedInUser;
   const { userId } = auth;
   const [keyword, setKeyword] = useState("");
 
@@ -20,7 +19,7 @@ export const useSearch = () => {
 
   useEffect(() => {
     dispatch(fetchAllUsers());
-  }, [userId, followers, following]);
+  }, [userId, loggedInUser]);
 
   const followSuggestions = allUsers.filter((user) => {
     const { followers } = user;
