@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateFollowers } from "../usersSlice";
+import { onFollowButtonClicked, updateFollowers } from "../usersSlice";
 import { followButtonState } from "../utils/followButtonStates";
 
 export const useFollow = ({ user }) => {
@@ -56,7 +56,7 @@ export const useFollow = ({ user }) => {
     }
 
     dispatch(
-      updateFollowers({
+      onFollowButtonClicked({
         loggedInUserId: authState.userId,
         userId: user._id,
         token: authState.token,

@@ -58,7 +58,7 @@ export const Followers = () => {
             <div className="flex items-center px-3 sticky z-30 top-0 bg-dark-3">
               <div
                 onClick={() => navigate(-1)}
-                className="p-1 py-2 rounded-full transparent-blue cursor-pointer text-brand mr-3 md:mr-6"
+                className="p-1 rounded-full transparent-blue cursor-pointer text-brand mr-3 md:mr-6"
               >
                 <IoIosArrowRoundBack size={30} />
               </div>

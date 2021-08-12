@@ -4,6 +4,7 @@ import { fetchUser } from "./usersSlice";
 
 import {
   NavDesktop,
+  NavMobile,
   SideBar,
   PageHeader,
   Loader,
@@ -20,7 +21,7 @@ export const Notifications = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUser({ userId, token }));
-  }, [userId, userState.allUsers]);
+  }, [userId]);
 
   let renderNotifications;
 
@@ -45,7 +46,7 @@ export const Notifications = () => {
   }
 
   return (
-    <main className="max-w-1250 m-auto grid grid-cols-252">
+    <main className="w-full m-auto md:max-w-1250 md:grid md:grid-cols-252">
       <NavDesktop />
       <section className="border border-outline border-t-0  border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
         {userState.user ? (
@@ -64,6 +65,9 @@ export const Notifications = () => {
         ) : (
           <Loader />
         )}
+      </section>
+      <section className="md:hidden bg-dark-3 border-t border-outline sticky bottom-0 z-10">
+        <NavMobile />
       </section>
       <SideBar />
     </main>

@@ -17,7 +17,6 @@ export const TimeAgo = ({ timestamp, full }) => {
     }
 
     if (full) {
-      console.log(date);
       timeAgo = `${formatDistanceToNow(date)} ago`;
     }
   }

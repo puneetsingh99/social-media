@@ -5,6 +5,7 @@ import { fetchUser } from "./usersSlice";
 import { fetchPostsByUser } from "../posts/postsSlice";
 import {
   NavDesktop,
+  NavMobile,
   SideBar,
   PageHeader,
   Loader,
@@ -82,6 +83,9 @@ export const User = () => {
         ) : (
           <Loader />
         )}
+      </section>
+      <section className="md:hidden bg-dark-3 border-t border-outline sticky bottom-0 z-10">
+        <NavMobile />
       </section>
       <SideBar />
     </main>

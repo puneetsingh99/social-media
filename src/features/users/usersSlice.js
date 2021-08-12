@@ -124,6 +124,14 @@ export const usersSlice = createSlice({
 
       state.allUsers[loggedInUserIndex] = updatedLoggedInUser;
       state.allUsers[updatedUserIndex] = updatedUser;
+      if (state.user) {
+        if (state.user._id === updatedUser._id) {
+          state.user = action.payload.updatedUser;
+        }
+        if (state.user._id === updatedLoggedInUser._id) {
+          state.user = action.payload.updatedLoggedInUser;
+        }
+      }
     },
   },
 });

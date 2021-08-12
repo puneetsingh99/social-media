@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Error, Loader, NavDesktop, PageHeader } from "../../common/components";
+import {
+  Error,
+  Loader,
+  NavDesktop,
+  NavMobile,
+  PageHeader,
+} from "../../common/components";
 import { PostExcerpt } from "./PostExcerpt";
 import { fetchPosts } from "./postsSlice";
 import { SideBar } from "../../common/components/side-bar/SideBar";
@@ -30,7 +36,6 @@ export const PostsList = () => {
   return (
     <main className="w-full m-auto md:max-w-1250 md:grid md:grid-cols-252">
       <NavDesktop />
-
       <section className="md:border md:border-outline md:border-t-0  md:border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
         <div className="bg-dark-3 border-b border-outline sticky top-0 z-10">
           <PageHeader heading={"Home"} />
@@ -43,6 +48,9 @@ export const PostsList = () => {
           <EmptyFeed message={"Such empty :("} />
         )}
         {posts.status === "failed" && <Error message={error} />}
+      </section>
+      <section className="md:hidden bg-dark-3 border-t border-outline sticky bottom-0 z-10">
+        <NavMobile />
       </section>
       <SideBar />
     </main>
