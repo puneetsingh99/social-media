@@ -5,6 +5,7 @@ import { API_ALL_USERS, getUserAPI, updateFollowersAPI } from "../../api";
 const initialState = {
   status: "idle",
   allUsers: [],
+  followReqStatus: "idle",
   user: null,
   error: null,
 };
@@ -72,7 +73,11 @@ export const onFollowButtonClicked = createAsyncThunk(
 export const usersSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    setFollowReqStatus: (state, action) => {
+      state.followReqStatus = action.payload;
+    },
+  },
   extraReducers: {
     [fetchAllUsers.pending]: (state) => {
       state.status = "loading";
@@ -110,8 +115,11 @@ export const usersSlice = createSlice({
       state.allUsers[updatedUserIndex] = updatedUser;
       state.user = action.payload.updatedUser;
     },
-
+    [onFollowButtonClicked.pending]: (state) => {
+      state.followReqStatus = "loading";
+    },
     [onFollowButtonClicked.fulfilled]: (state, action) => {
+      state.followReqStatus = "succeeded";
       const { updatedLoggedInUser, updatedUser } = action.payload;
 
       const loggedInUserIndex = state.allUsers.findIndex(
@@ -133,9 +141,14 @@ export const usersSlice = createSlice({
         }
       }
     },
+    [onFollowButtonClicked.rejected]: (state, action) => {
+      state.followReqStatus = "failed";
+      state.error = action.payload.message;
+    },
   },
 });
 
+export const { setFollowReqStatus } = usersSlice.actions;
 export const selectAllUsers = (state) => state.users.allUsers;
 export const selectUser = (state) => state.users.user;
 export const selectUserById = (state, userId) =>

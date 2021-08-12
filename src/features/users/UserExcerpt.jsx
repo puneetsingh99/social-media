@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { Avatar } from "../../common/components";
 import { followButtonState } from "./utils/followButtonStates";
 import { useSelector, useDispatch } from "react-redux";
-import { onFollowButtonClicked } from "./usersSlice";
+import { onFollowButtonClicked, setFollowReqStatus } from "./usersSlice";
 
 export const UserExcerpt = ({ user }) => {
+  const { followReqStatus } = useSelector((state) => state.users);
+  console.log({ followReqStatus });
   const { _id, username, firstname, lastname, bio, profilePic } = user;
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth.auth);
@@ -27,6 +29,7 @@ export const UserExcerpt = ({ user }) => {
     if (followButton.text === "Following") {
       setFollowButton(followState);
     }
+
     dispatch(
       onFollowButtonClicked({
         loggedInUserId: authState.userId,
@@ -35,6 +38,12 @@ export const UserExcerpt = ({ user }) => {
       })
     );
   };
+
+  useEffect(() => {
+    if (followReqStatus === "succeeded") {
+      dispatch(setFollowReqStatus("idle"));
+    }
+  }, [followReqStatus]);
 
   return (
     <>
@@ -52,6 +61,7 @@ export const UserExcerpt = ({ user }) => {
               </div>
               {!isLoggedInUser && (
                 <button
+                  disabled={followReqStatus === "loading"}
                   onClick={(e) => followButtonClicked(e)}
                   className={`${followButton.css} py-1`}
                 >
