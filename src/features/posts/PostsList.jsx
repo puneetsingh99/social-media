@@ -45,7 +45,10 @@ export const PostsList = () => {
           <div className="hidden md:block">
             <PageHeader heading={"Home"} />
           </div>
-          <HomePageHeader setShowHamburgerMenu={setShowHamburgerMenu} />
+          <HomePageHeader
+            setShowHamburgerMenu={setShowHamburgerMenu}
+            loggedInUser={loggedInUser}
+          />
         </div>
         <AddPostForm />
         <div className="h-3 bg-dark-3-hover border-b border-outline"></div>
