@@ -127,6 +127,3 @@ export const PostDetail = () => {
     </>
   );
 };
-
-{
-}

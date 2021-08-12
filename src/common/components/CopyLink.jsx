@@ -2,7 +2,12 @@ import React, { useRef, useEffect } from "react";
 import { HiLink } from "react-icons/hi";
 import { BsCheckCircle } from "react-icons/bs";
 
-export const CopyLink = ({ linkCopied, setLinkCopied, postId }) => {
+export const CopyLink = ({
+  linkCopied,
+  setLinkCopied,
+  postId,
+  setShowLinkCopy,
+}) => {
   const postLink = `https://growsocialmedia.netlify.app/post/${postId}`;
   const linkRef = useRef(null);
 
@@ -10,7 +15,8 @@ export const CopyLink = ({ linkCopied, setLinkCopied, postId }) => {
     if (linkCopied) {
       setTimeout(() => {
         setLinkCopied(false);
-      }, 5000);
+        setShowLinkCopy(false);
+      }, 3000);
     }
   }, [linkCopied]);
 

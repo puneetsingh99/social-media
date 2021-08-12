@@ -38,18 +38,20 @@ export const AddPostForm = () => {
         </Link>
       </aside>
       <div className="w-full py-4">
-        <textarea
-          maxLength={280}
-          value={postState.caption}
-          onChange={(e) => {
-            return postDispatch({
-              type: "SET_CAPTION",
-              payload: e.target.value,
-            });
-          }}
-          className="bg-transparent w-full border-none outline-none text-xl"
-          placeholder="What's happening?"
-        />
+        <div className="pr-2 mb-2">
+          <textarea
+            maxLength={280}
+            value={postState.caption}
+            onChange={(e) => {
+              return postDispatch({
+                type: "SET_CAPTION",
+                payload: e.target.value,
+              });
+            }}
+            className="bg-transparent w-full border-none outline-none text-xl"
+            placeholder="What's happening?"
+          />
+        </div>
         {postState.photoOrVideo && (
           <div className="flex-c w-full px-4 text-text-gray text-sm">
             <div
