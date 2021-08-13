@@ -15,7 +15,6 @@ export const NotificationsList = () => {
   const { auth, loggedInUser } = useSelector((state) => state.auth);
   const { userId } = auth;
 
-  const userState = useSelector((state) => state.users);
   let renderNotifications;
 
   if (loggedInUser) {
@@ -42,7 +41,7 @@ export const NotificationsList = () => {
     <main className="w-full m-auto md:max-w-1250 md:grid md:grid-cols-252">
       <NavDesktop />
       <section className="md:border border-outline md:border-t-0  md:border-b-0 h-screen pb-8 overflow-scroll hide-scrollbar">
-        {userState.user ? (
+        {loggedInUser ? (
           <div>
             <div className="flex items-center px-3  sticky z-30 top-0 bg-dark-3 border-b border-outline">
               <PageHeader heading={`Notifications`} />

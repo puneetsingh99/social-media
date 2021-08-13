@@ -14,7 +14,6 @@ import { EditPost } from "./components/EditPost";
 export const PostDetail = () => {
   const { userId, token } = useSelector((state) => state.auth.auth);
   const { post } = useSelector((state) => state.posts);
-  const navigate = useNavigate();
 
   const { author, content, image, video, createdAt, comments } = post;
   const { _id, firstname, lastname, username, profilePic } = author;

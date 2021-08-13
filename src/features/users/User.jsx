@@ -28,6 +28,7 @@ export const User = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchUser({ userId, token }));
     dispatch(fetchPostsByUser({ userId, token }));
@@ -38,8 +39,8 @@ export const User = () => {
       dispatch(fetchUser({ userId, token }));
     }
   }, [editProfileStatus]);
-  let renderPosts;
 
+  let renderPosts;
   if (postsByUserStatus === "succeeded") {
     const orderedPosts = postsByUser
       .slice()

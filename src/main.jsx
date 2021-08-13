@@ -8,6 +8,7 @@ import store from "./app/store";
 import { BrowserRouter as Router } from "react-router-dom";
 import { fetchAllUsers } from "./features/users/usersSlice";
 
+console.log("MAIN.JSX fetch all users...");
 store.dispatch(fetchAllUsers());
 ReactDOM.render(
   <React.StrictMode>

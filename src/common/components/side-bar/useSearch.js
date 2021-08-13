@@ -21,10 +21,6 @@ export const useSearch = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllUsers());
-  }, [userId]);
-
-  useEffect(() => {
     if (followReqStatus === "succeeded") {
       dispatch(fetchAllUsers());
       dispatch(setFollowReqStatus("idle"));

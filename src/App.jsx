@@ -6,6 +6,7 @@ import { SignupForm } from "./features/auth/signup/SignupForm";
 import { Followers, User, NotificationsList } from "./features/users";
 import { Post, PostsList } from "./features/posts";
 import { SideBarMobile } from "./common/components/side-bar/SideBarMobile";
+import { PageNotFound } from "./common/components";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/signup" element={<SignupForm />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </main>
   );
