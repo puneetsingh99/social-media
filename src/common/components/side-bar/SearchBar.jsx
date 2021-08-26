@@ -8,17 +8,18 @@ export const SearchBar = () => {
 
   let renderUsers;
 
-  if (keyword !== "") {
+  if (keyword.length > 0) {
     if (searchResult.length === 0) {
       renderUsers = (
-        <div className="flex-c text-text-gray h-50">
-          <p>No user found :(</p>
+        <div className="flex-c text-text-gray text-lg h-50">
+          <p>No users found :(</p>
         </div>
       );
+    } else {
+      renderUsers = searchResult.map((user) => (
+        <UserExcerpt key={user._id} user={user} />
+      ));
     }
-    renderUsers = searchResult.map((user) => (
-      <UserExcerpt key={user._id} user={user} />
-    ));
   }
 
   return (
