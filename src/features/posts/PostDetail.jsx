@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactPlayer from "react-player";
 import { Avatar } from "../../common/components";
 import { ReactionButtons } from "./ReactionButtons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { TimeAgo } from "../../common/components";
 import { CommentSection } from "./CommentSection";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,6 +10,7 @@ import { MdDelete } from "react-icons/md";
 import { FiEdit2 } from "react-icons/fi";
 import { removePost } from "./postsSlice";
 import { EditPost } from "./components/EditPost";
+import { useModal } from "../../common/contexts/ModalContext";
 
 export const PostDetail = () => {
   const { userId, token } = useSelector((state) => state.auth.auth);
@@ -25,7 +26,18 @@ export const PostDetail = () => {
   const dispatch = useDispatch();
 
   const onRemoveButtonClicked = () => {
-    dispatch(removePost({ postId: post._id, token }));
+    modalDispatch({
+      type: "SET_MODAL_STATE",
+      payload: true,
+    });
+    modalDispatch({
+      type: "SET_ACTION_TYPE",
+      payload: "remove post",
+    });
+    modalDispatch({
+      type: "SET_CONFIRM_HANDLER",
+      payload: () => dispatch(removePost({ postId: post._id, token })),
+    });
   };
 
   const loggedInUsersPost = userId === _id;
@@ -36,6 +48,8 @@ export const PostDetail = () => {
     post,
     setShowComments,
   };
+
+  const { modalDispatch } = useModal();
 
   return (
     <>

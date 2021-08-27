@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Comment } from "./components/Comment";
-
+import { setStatus } from "./postsSlice";
+import { useSelector, useDispatch } from "react-redux";
 import { useComment } from "./hooks/useComment";
+import { useModal } from "../../common/contexts/ModalContext";
 
 export const CommentSection = ({ comments, post }) => {
+  const dispatch = useDispatch();
   const {
     comment,
     setComment,
@@ -11,6 +14,11 @@ export const CommentSection = ({ comments, post }) => {
     addCommentStatus,
     onRemoveButtonClicked,
   } = useComment(post);
+
+  const emptyComment = comment.content.length === 0;
+
+  const { deleteCommentStatus } = useSelector((state) => state.posts);
+  const { cancel } = useModal();
 
   const orderedComments = comments
     .slice()
@@ -25,6 +33,13 @@ export const CommentSection = ({ comments, post }) => {
   ));
 
   const loading = addCommentStatus === "loading";
+
+  useEffect(() => {
+    if (deleteCommentStatus === "succeeded") {
+      cancel();
+      dispatch(setStatus({ name: "deleteCommentStatus", value: "idle" }));
+    }
+  }, [deleteCommentStatus]);
 
   return (
     <section className="py-4 px-2 md:p-4 border-b border-outline">
@@ -45,7 +60,7 @@ export const CommentSection = ({ comments, post }) => {
         <div>
           <button
             title="Reply to this post"
-            disabled={loading}
+            disabled={loading || emptyComment}
             onClick={onReplyClicked}
             className={`border border-brand px-4 py-1 self-start rounded-full font-bold text-brand transparent-brand ${
               loading && "cursor-wait"

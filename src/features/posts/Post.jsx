@@ -13,6 +13,7 @@ import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { PostDetail } from "./PostDetail";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { setStatus } from "./postsSlice";
+import { useModal } from "../../common/contexts/ModalContext";
 
 export const Post = () => {
   const { token } = useSelector((state) => state.auth.auth);
@@ -27,9 +28,12 @@ export const Post = () => {
     dispatch(fetchPost({ postId, token }));
   }, [postId]);
 
+  const { cancel } = useModal();
+
   useEffect(() => {
     if (removePostStatus === "succeeded") {
       dispatch(setStatus({ name: "removePostStatus", value: "idle" }));
+      cancel();
     }
   }, [removePostStatus]);
 
