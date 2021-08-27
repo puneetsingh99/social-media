@@ -32,6 +32,7 @@ export const Post = () => {
 
   useEffect(() => {
     if (removePostStatus === "succeeded") {
+      navigate("/");
       dispatch(setStatus({ name: "removePostStatus", value: "idle" }));
       cancel();
     }
@@ -40,7 +41,7 @@ export const Post = () => {
   let renderPost;
 
   if (fetchPostStatus === "succeeded") {
-    renderPost = post ? <PostDetail /> : <Navigate to={"/"} />;
+    renderPost = post && <PostDetail />;
   }
 
   return (

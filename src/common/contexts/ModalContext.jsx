@@ -12,6 +12,7 @@ const modalReducer = (state, action) => {
     SET_MODAL_STATE: { ...state, showModal: action.payload },
     SET_CONFIRM_HANDLER: { ...state, confirm: action.payload },
     SET_ACTION_TYPE: { ...state, actionType: action.payload },
+    SET_BUTTON_NAME: { ...state, buttonName: action.payload },
   };
 
   const newState = modalActions[action.type] || state;

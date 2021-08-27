@@ -44,6 +44,10 @@ export const Comment = ({ comment, onRemoveButtonClicked }) => {
             onClick={() => {
               modalDispatch({ type: "SET_MODAL_STATE", payload: true });
               modalDispatch({
+                type: "SET_BUTTON_NAME",
+                payload: "Delete",
+              });
+              modalDispatch({
                 type: "SET_ACTION_TYPE",
                 payload: "remove comment",
               });

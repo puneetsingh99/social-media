@@ -6,6 +6,7 @@ import { notificationStyle } from "./nav/utils";
 import { logout } from "../../features/auth/authSlice";
 import { HiOutlineUser } from "react-icons/hi";
 import { FiLogOut } from "react-icons/fi";
+import { useModal } from "../contexts/ModalContext";
 
 export const HamburgerMenu = ({ setShowHamburgerMenu }) => {
   const { auth, loggedInUser } = useSelector((state) => state.auth);
@@ -13,6 +14,28 @@ export const HamburgerMenu = ({ setShowHamburgerMenu }) => {
     loggedInUser;
   const profileRoute = `/user/${auth.userId}`;
   const dispatch = useDispatch();
+
+  const { modalDispatch, cancel } = useModal();
+
+  const logoutHandler = () => {
+    modalDispatch({ type: "SET_MODAL_STATE", payload: true });
+    modalDispatch({
+      type: "SET_BUTTON_NAME",
+      payload: "Log out",
+    });
+    modalDispatch({
+      type: "SET_ACTION_TYPE",
+      payload: "logout",
+    });
+    modalDispatch({
+      type: "SET_CONFIRM_HANDLER",
+      payload: () => {
+        dispatch(logout());
+        cancel();
+      },
+    });
+  };
+
   return (
     <main>
       <article className="w-full h-screen bg-dark-3">
@@ -37,18 +60,18 @@ export const HamburgerMenu = ({ setShowHamburgerMenu }) => {
           </div>
         </section>
 
-        <nav onClick={() => setShowHamburgerMenu(false)} className="py-2">
+        <nav className="py-2">
           <Link to={profileRoute}>
-            <div className={`${notificationStyle} `}>
+            <div
+              onClick={() => setShowHamburgerMenu(false)}
+              className={`${notificationStyle} `}
+            >
               <HiOutlineUser size={25} />
               <h1>Profile</h1>
             </div>
           </Link>
           <div className="pl-1">
-            <div
-              onClick={() => dispatch(logout())}
-              className={`${notificationStyle}`}
-            >
+            <div onClick={logoutHandler} className={`${notificationStyle}`}>
               <FiLogOut size={25} />
               <h1>Logout</h1>
             </div>

@@ -29,9 +29,6 @@ export const AddPostForm = () => {
     emptyPost = true;
   }
 
-  console.log({ caption, photoOrVideo });
-  console.log(emptyPost);
-
   const dispatch = useDispatch();
   useEffect(() => {
     if (isUserLoggedIn) {

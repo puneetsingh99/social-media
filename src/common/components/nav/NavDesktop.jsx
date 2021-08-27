@@ -1,17 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../../features/auth/authSlice";
 import { RiHome7Line } from "react-icons/ri";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { HiOutlineUser } from "react-icons/hi";
 import { FiLogOut } from "react-icons/fi";
-import { FaTwitter } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { appRoutes } from "./appRoutes";
 import { notificationStyle } from "./utils";
 import { Avatar } from "..";
-import { fetchLoggedInUser } from "../../../features/auth/authSlice";
 import { LogoSvg } from "../../../assets/LogoSvg";
+import { useModal } from "../../contexts/ModalContext";
 
 export const NavDesktop = () => {
   const { pathname } = useLocation();
@@ -23,6 +22,27 @@ export const NavDesktop = () => {
   const { home, notifications } = appRoutes;
 
   const profileRoute = `/user/${userId}`;
+
+  const { modalDispatch, cancel } = useModal();
+
+  const logoutHandler = () => {
+    modalDispatch({ type: "SET_MODAL_STATE", payload: true });
+    modalDispatch({
+      type: "SET_BUTTON_NAME",
+      payload: "Log out",
+    });
+    modalDispatch({
+      type: "SET_ACTION_TYPE",
+      payload: "logout",
+    });
+    modalDispatch({
+      type: "SET_CONFIRM_HANDLER",
+      payload: () => {
+        dispatch(logout());
+        cancel();
+      },
+    });
+  };
 
   return (
     <aside className="hidden md:block sticky top-0">
@@ -67,7 +87,7 @@ export const NavDesktop = () => {
           </div>
         </Link>
         <div
-          onClick={() => dispatch(logout())}
+          onClick={logoutHandler}
           className={`${notificationStyle} hover:cursor-pointer`}
         >
           <FiLogOut size={25} />

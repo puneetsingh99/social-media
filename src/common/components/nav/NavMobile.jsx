@@ -15,7 +15,6 @@ export const NavMobile = () => {
   const { userId, token } = auth;
 
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fetchLoggedInUser({ userId, token }));
   }, [userId]);

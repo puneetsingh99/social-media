@@ -27,6 +27,10 @@ export const PostDetail = () => {
 
   const onRemoveButtonClicked = () => {
     modalDispatch({
+      type: "SET_BUTTON_NAME",
+      payload: "Delete",
+    });
+    modalDispatch({
       type: "SET_MODAL_STATE",
       payload: true,
     });
