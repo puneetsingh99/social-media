@@ -20,6 +20,8 @@ export const UserExcerpt = ({ user }) => {
     isAFollower ? followingState : followState
   );
 
+  const [disableButton, setDisableButton] = useState(false);
+
   const followButtonClicked = (e) => {
     e.preventDefault();
     if (followButton.text === "Follow") {
@@ -41,8 +43,11 @@ export const UserExcerpt = ({ user }) => {
   useEffect(() => {
     if (followReqStatus === "succeeded") {
       dispatch(setFollowReqStatus("idle"));
+      setDisableButton(false);
     }
-  }, [followReqStatus]);
+  }, [followReqStatus, setDisableButton]);
+
+  const loadingState = followReqStatus === "loading" && disableButton;
 
   return (
     <>
@@ -60,9 +65,14 @@ export const UserExcerpt = ({ user }) => {
               </div>
               {!isLoggedInUser && (
                 <button
-                  disabled={followReqStatus === "loading"}
-                  onClick={(e) => followButtonClicked(e)}
-                  className={`${followButton.css} py-1`}
+                  disabled={loadingState}
+                  onClick={(e) => {
+                    setDisableButton(true);
+                    followButtonClicked(e);
+                  }}
+                  className={`${followButton.css} py-1 ${
+                    loadingState && `cursor-wait`
+                  }`}
                 >
                   {followButton.text}
                 </button>
