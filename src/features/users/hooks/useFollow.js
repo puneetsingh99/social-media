@@ -5,6 +5,7 @@ import { followButtonState } from "../utils/followButtonStates";
 
 export const useFollow = ({ user }) => {
   const dispatch = useDispatch();
+  const { followReqStatus } = useSelector((state) => state.users);
   const authState = useSelector((state) => state.auth.auth);
 
   const { _id, followers, following } = user;
@@ -69,6 +70,7 @@ export const useFollow = ({ user }) => {
     followButtonClicked,
     showEditProfile,
     setShowEditProfile,
+    followReqStatus,
     ...user,
   };
 };

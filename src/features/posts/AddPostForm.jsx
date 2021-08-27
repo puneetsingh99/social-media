@@ -21,6 +21,14 @@ export const AddPostForm = () => {
   const { postState, postDispatch, postButtonClicked, addPostStatus } =
     usePost();
 
+  const { caption, photoOrVideo } = postState;
+
+  let emptyPost = false;
+
+  if (caption.length === 0 && !photoOrVideo) {
+    emptyPost = true;
+  }
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (isUserLoggedIn) {
@@ -117,11 +125,11 @@ export const AddPostForm = () => {
             </div>
             <div className="pr-4 flex-c w-max inline-block ml-2">
               <button
-                disabled={loading}
+                disabled={loading || emptyPost}
                 onClick={postButtonClicked}
                 className={`border-brand px-4 py-2 rounded-full text-md font-bold text-white bg-brand ${
                   loading && "cursor-wait"
-                }`}
+                } ${emptyPost && "cursor-not-allowed"}`}
               >
                 {loading ? "Posting..." : "Post"}
               </button>

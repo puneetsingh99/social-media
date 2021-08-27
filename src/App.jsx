@@ -7,10 +7,19 @@ import { Followers, User, NotificationsList } from "./features/users";
 import { Post, PostsList } from "./features/posts";
 import { SideBarMobile } from "./common/components/side-bar/SideBarMobile";
 import { PageNotFound } from "./common/components";
+import { ConfirmationModal } from "./common/components/ConfirmationModal";
+import { useModal } from "./common/contexts/ModalContext";
 
 function App() {
+  const { modalState } = useModal();
+
   return (
     <main className="min-h-screen font-inter bg-dark-3 text-text-light">
+      {modalState.showModal && (
+        <div className="fixed z-40 w-full h-full">
+          <ConfirmationModal />
+        </div>
+      )}
       <Routes>
         <PrivateRoute path="/" element={<PostsList />} />
         <PrivateRoute path="/post/:postId" element={<Post />} />

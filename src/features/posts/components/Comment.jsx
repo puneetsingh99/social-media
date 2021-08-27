@@ -4,13 +4,15 @@ import { Avatar } from "../../../common/components";
 import { TimeAgo } from "../../../common/components";
 import { useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
+import { useModal } from "../../../common/contexts/ModalContext";
 
 export const Comment = ({ comment, onRemoveButtonClicked }) => {
   const { madeBy, content, createdAt } = comment;
   const { firstname, lastname, username, profilePic, _id } = madeBy;
   const { userId } = useSelector((state) => state.auth.auth);
-
   const loggedInUsersComment = userId === _id;
+
+  const { modalDispatch } = useModal();
 
   return (
     <article className="flex px-1 md:px-2 py-4 pb-1 cursor-pointer">
@@ -39,7 +41,21 @@ export const Comment = ({ comment, onRemoveButtonClicked }) => {
         <div>
           <div
             title="Remove this comment"
-            onClick={() => onRemoveButtonClicked(comment._id)}
+            onClick={() => {
+              modalDispatch({ type: "SET_MODAL_STATE", payload: true });
+              modalDispatch({
+                type: "SET_BUTTON_NAME",
+                payload: "Delete",
+              });
+              modalDispatch({
+                type: "SET_ACTION_TYPE",
+                payload: "remove comment",
+              });
+              modalDispatch({
+                type: "SET_CONFIRM_HANDLER",
+                payload: () => onRemoveButtonClicked(comment._id),
+              });
+            }}
             className="p-1 rounded-full transparent-pink flex-c text-text-gray hover:text-red-500   transition duration-200"
           >
             <MdDelete size={18} />

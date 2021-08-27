@@ -28,14 +28,10 @@ export const LoginForm = () => {
     const { isValid, message } = validateLoginForm(formState);
 
     if (!isValid) {
-      setValidationError(message);
+      return setValidationError(message);
     }
-
-    if (isValid) {
-      console.log(auth);
-      dispatch(loginWithCredentials({ email, password }));
-      formDispatch({ type: "RST_FORM" });
-    }
+    dispatch(loginWithCredentials({ email, password }));
+    formDispatch({ type: "RST_FORM" });
   };
 
   const guestLogin = (e) => {
@@ -44,13 +40,11 @@ export const LoginForm = () => {
     const { isValid, message } = validateLoginForm(credentials);
 
     if (!isValid) {
-      setValidationError(message);
+      return setValidationError(message);
     }
 
-    if (isValid) {
-      dispatch(loginWithCredentials(credentials));
-      formDispatch({ type: "RST_FORM" });
-    }
+    dispatch(loginWithCredentials(credentials));
+    formDispatch({ type: "RST_FORM" });
   };
 
   const inputFieldStyle = `w-full bg-dark-3 text-lg px-2 py-3  mb-6 rounded-md border-2 border-outline focus:border-transparent focus:outline-none focus:ring-2 ring-brand ring-opacity-60`;

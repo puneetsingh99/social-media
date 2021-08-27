@@ -10,6 +10,7 @@ export const UserDetails = ({ user }) => {
     followButtonStyle,
     showEditProfile,
     setShowEditProfile,
+    followReqStatus,
   } = useFollow({ user });
 
   return (
@@ -23,10 +24,15 @@ export const UserDetails = ({ user }) => {
         >
           <Avatar img={user.profilePic} size={`2xl`} />
         </div>
-        <div className="flex justify-end items-center h-full pr-3 md:pr-6 py-3">
+        <div
+          className={`flex justify-end items-center h-full pr-3 md:pr-6 py-3`}
+        >
           <button
+            disabled={followReqStatus === "loading"}
             onClick={followButtonClicked}
-            className={followButtonStyle.css}
+            className={`${followButtonStyle.css}  ${
+              followReqStatus === "loading" && "cursor-wait"
+            }`}
           >
             {followButtonStyle.text}
           </button>

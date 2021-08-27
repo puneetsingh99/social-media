@@ -146,6 +146,7 @@ const initialState = {
   removePostStatus: "idle",
   updatePostStatus: "idle",
   addCommentStatus: "idle",
+  deleteCommentStatus: "idle",
   error: null,
 };
 
@@ -299,7 +300,11 @@ export const postsSlice = createSlice({
       state.addCommentStatus = "failed";
       state.error = action.payload.message;
     },
+    [deleteComment.pending]: (state) => {
+      state.deleteCommentStatus = "loading";
+    },
     [deleteComment.fulfilled]: (state, action) => {
+      state.deleteCommentStatus = "succeeded";
       const postId = action.payload._id;
       const allPostsPostIndex = state.posts.findIndex(
         (post) => post._id === postId
@@ -321,6 +326,10 @@ export const postsSlice = createSlice({
       if (postsByUserIndex !== -1) {
         state.postsByUser[postsByUserIndex] = action.payload;
       }
+    },
+    [deleteComment.rejected]: (state, action) => {
+      state.deleteCommentStatus = "failed";
+      state.error = action.payload.message;
     },
     [likePost.fulfilled]: (state, action) => {
       const postId = action.payload._id;
