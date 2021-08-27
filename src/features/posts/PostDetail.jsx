@@ -118,11 +118,11 @@ export const PostDetail = () => {
             )}
 
             {image && (
-              <div className="border border-outline rounded-2xl max-h-275 overflow-hidden">
+              <div className="rounded-2xl max-h-275 overflow-hidden">
                 <img
                   src={image}
                   alt={`a post by ${username}`}
-                  className="rounded-2xl"
+                  className="rounded-2xl border border-outline"
                 />
               </div>
             )}
