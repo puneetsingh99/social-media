@@ -7,13 +7,16 @@ import { Provider } from "react-redux";
 import store from "./app/store";
 import { BrowserRouter as Router } from "react-router-dom";
 import { fetchAllUsers } from "./features/users/usersSlice";
+import { ModalProvider } from "./common/contexts/ModalContext";
 
 store.dispatch(fetchAllUsers());
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Provider store={store}>
-        <App />
+        <ModalProvider>
+          <App />
+        </ModalProvider>
       </Provider>
     </Router>
   </React.StrictMode>,
