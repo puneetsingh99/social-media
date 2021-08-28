@@ -9,9 +9,13 @@ import { SideBarMobile } from "./common/components/side-bar/SideBarMobile";
 import { PageNotFound } from "./common/components";
 import { ConfirmationModal } from "./common/components/ConfirmationModal";
 import { useModal } from "./common/contexts/ModalContext";
+import { useWindowSize } from "./common/hooks/useWindowSize";
 
 function App() {
   const { modalState } = useModal();
+
+  const [width] = useWindowSize();
+  const renderSearchPage = width < 768;
 
   return (
     <main className="min-h-screen font-inter bg-dark-3 text-text-light">
@@ -28,7 +32,10 @@ function App() {
           path="/user/notifications"
           element={<NotificationsList />}
         />
-        <PrivateRoute path="/search" element={<SideBarMobile />} />
+        <PrivateRoute
+          path="/search"
+          element={renderSearchPage ? <SideBarMobile /> : <PostsList />}
+        />
 
         <PrivateRoute
           path="/user/:userId/:followersOrFollowing"
