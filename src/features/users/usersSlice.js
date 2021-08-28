@@ -92,6 +92,7 @@ export const usersSlice = createSlice({
     },
     [fetchUser.pending]: (state) => {
       state.status = "loading";
+      state.user = null;
     },
     [fetchUser.fulfilled]: (state, action) => {
       state.user = action.payload;
