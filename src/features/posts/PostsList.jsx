@@ -74,7 +74,7 @@ export const PostsList = () => {
 
           <aside
             onClick={() => setShowHamburgerMenu(false)}
-            className={`w-1/6 h-screen`}
+            className={`w-3/12 h-screen`}
           ></aside>
         </section>
       )}
