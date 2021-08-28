@@ -4,6 +4,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchUser } from "./usersSlice";
 import { UserExcerpt } from "./UserExcerpt";
+import { NavMobile } from "../../common/components";
 
 import {
   NavDesktop,
@@ -102,6 +103,9 @@ export const Followers = () => {
         ) : (
           <Loader />
         )}
+      </section>
+      <section className="md:hidden bg-dark-3 border-t border-outline sticky bottom-0 z-10">
+        <NavMobile />
       </section>
       <SideBar />
     </main>
