@@ -81,7 +81,7 @@ export const User = () => {
             {postsByUserStatus === "loading" && <Loader />}
             {postsByUserStatus === "succeeded" && renderPosts}
             {postsByUserStatus === "succeeded" && renderPosts.length === 0 && (
-              <EmptyFeed message={"Such empty :("} />
+              <EmptyFeed message={"No posts :("} />
             )}
             {postsByUserStatus === "failed" && <Error message={error} />}
           </div>

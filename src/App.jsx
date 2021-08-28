@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { LoginForm } from "./features/auth/login/LoginForm";
 import { PrivateRoute } from "./common/components/PrivateRoute";
 import { SignupForm } from "./features/auth/signup/SignupForm";
@@ -9,12 +9,16 @@ import { SideBarMobile } from "./common/components/side-bar/SideBarMobile";
 import { PageNotFound } from "./common/components";
 import { ConfirmationModal } from "./common/components/ConfirmationModal";
 import { useModal } from "./common/contexts/ModalContext";
+import { useWindowSize } from "./common/hooks/useWindowSize";
 
 function App() {
   const { modalState } = useModal();
 
+  const [width] = useWindowSize();
+  const renderSearchPage = width < 768;
+
   return (
-    <main className="min-h-screen font-inter bg-dark-3 text-text-light">
+    <main className="h-screen font-inter bg-dark-3 text-text-light">
       {modalState.showModal && (
         <div className="fixed z-40 w-full h-full">
           <ConfirmationModal />
@@ -28,7 +32,12 @@ function App() {
           path="/user/notifications"
           element={<NotificationsList />}
         />
-        <PrivateRoute path="/search" element={<SideBarMobile />} />
+        <PrivateRoute
+          path="/search"
+          element={
+            renderSearchPage ? <SideBarMobile /> : <Navigate replace to="/" />
+          }
+        />
 
         <PrivateRoute
           path="/user/:userId/:followersOrFollowing"

@@ -75,7 +75,7 @@ export const ReactionButtons = ({
           e.stopPropagation();
           setShowLinkCopy((currState) => !currState);
         }}
-        className={` ${commonClasses} p-4 hover:text-brand transparent-blue relative`}
+        className={` ${commonClasses} p-2 hover:text-brand transparent-blue relative`}
         title="Share"
       >
         <FiShare size={18} />

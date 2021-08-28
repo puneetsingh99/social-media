@@ -127,9 +127,9 @@ export const AddPostForm = () => {
               <button
                 disabled={loading || emptyPost}
                 onClick={postButtonClicked}
-                className={`border-brand px-4 py-2 rounded-full text-md font-bold text-white bg-brand ${
+                className={`border-brand px-4 py-2 rounded-full text-md font-bold text-white bg-brand disabled:opacity-60 ${
                   loading && "cursor-wait"
-                } ${emptyPost && "cursor-not-allowed"}`}
+                }`}
               >
                 {loading ? "Posting..." : "Post"}
               </button>
