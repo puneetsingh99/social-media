@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { LoginForm } from "./features/auth/login/LoginForm";
 import { PrivateRoute } from "./common/components/PrivateRoute";
 import { SignupForm } from "./features/auth/signup/SignupForm";
@@ -34,7 +34,9 @@ function App() {
         />
         <PrivateRoute
           path="/search"
-          element={renderSearchPage ? <SideBarMobile /> : <PostsList />}
+          element={
+            renderSearchPage ? <SideBarMobile /> : <Navigate replace to="/" />
+          }
         />
 
         <PrivateRoute
