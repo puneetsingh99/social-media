@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SearchBar } from "./SearchBar";
 import { FollowSuggestions } from "./FollowSuggestions";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchLoggedInUser } from "../../../features/auth/authSlice";
 
 export const SideBar = () => {
-  const { loggedInUser } = useSelector((state) => state.auth);
+  const { auth, loggedInUser } = useSelector((state) => state.auth);
+  const { userId, token } = auth;
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchLoggedInUser({ userId, token }));
+  }, [userId]);
+
   return (
     <aside className="hidden sm:block sticky top-0 ml-6">
       <article>
