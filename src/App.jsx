@@ -18,7 +18,7 @@ function App() {
   const renderSearchPage = width < 768;
 
   return (
-    <main className="min-h-screen font-inter bg-dark-3 text-text-light">
+    <main className="h-screen font-inter bg-dark-3 text-text-light">
       {modalState.showModal && (
         <div className="fixed z-40 w-full h-full">
           <ConfirmationModal />
